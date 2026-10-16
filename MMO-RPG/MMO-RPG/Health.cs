@@ -4,5 +4,44 @@ namespace MMO_RPG
 {
     class Health
     {
+        private int health;
+        public Health(int initHealth)
+        {
+            if (health > 0)
+            {
+                health = initHealth;
+                return;
+            }
+            throw new ArgumentException("Initial health must be positive");
+        }
+        
+        public void Decrease(int amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Damage must be positive");
+            }
+            if (amount > health)
+            {
+                health = 0;
+                return;
+            }
+            health -= amount;
+        }
+
+        public void Increase(int amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Heal must be positive");
+            }
+            health += amount;
+        }
+
+        public bool IsZero()
+        {
+            return health == 0;
+        }
+
     }
 }

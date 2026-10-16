@@ -43,6 +43,7 @@
     <Compile Include="AttackSpeed.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="Health.cs" />
+    <Compile Include="IUnitFabric.cs" />
     <Compile Include="Mage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Swordsman.cs" />

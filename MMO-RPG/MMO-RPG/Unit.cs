@@ -5,9 +5,10 @@ namespace MMO_RPG
 {
     abstract class Unit
     {
-        public void CreateUnit()
-        {
+        public abstract void Move(int x, int y);
 
-        }
+        public abstract void Clone();
+
+        public abstract string GetUnitType();
     }
 }
