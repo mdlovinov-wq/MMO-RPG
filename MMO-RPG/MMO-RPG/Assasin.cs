@@ -2,7 +2,7 @@
 
 namespace MMO_RPG
 {
-    class Assasin : Unit
+    abstract class Assasin : Unit
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MMO_RPG
 {
-    class Swordsman : Unit
+    abstract class Swordsman : Unit
     {
     }
 }

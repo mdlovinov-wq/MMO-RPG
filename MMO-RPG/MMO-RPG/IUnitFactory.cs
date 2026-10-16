@@ -2,7 +2,7 @@
 
 namespace MMO_RPG
 {
-    internal interface IUnitFabric
+    internal interface IUnitFactory
     {
         Unit CreateUnit();
     }

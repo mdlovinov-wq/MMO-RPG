@@ -2,7 +2,7 @@
 
 namespace MMO_RPG
 {
-    class Mage : Unit
+    abstract class Mage : Unit
     {
     }
 }

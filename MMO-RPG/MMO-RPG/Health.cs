@@ -7,11 +7,11 @@ namespace MMO_RPG
         private int health;
         public Health(int initHealth)
         {
-            if (health > 0)
+            if (initHealth > 0)
             {
                 health = initHealth;
                 return;
-            }
+            }   
             throw new ArgumentException("Initial health must be positive");
         }
         

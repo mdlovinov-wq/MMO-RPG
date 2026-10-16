@@ -17,13 +17,11 @@ namespace MMO_RPG
 
         public int ReduceDamage(int damage)
         {
-            if (armor > damage)
+            if (damage < 0)
             {
-                armor -= damage;
-                return 0;
+                throw new ArgumentException("Damage can't be negative");
             }
-            armor = 0;
-            return damage - armor;
+            return Math.Max(0, damage - armor);
         }
 
     }

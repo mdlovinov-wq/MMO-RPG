@@ -40,7 +40,7 @@ namespace MMO_RPG
 
         public GameField CloneField()
         {
-            GameField other = new GameField(0, 0, 0);
+            GameField other = new GameField(0, 0, 1);
             return other;
         }
 
@@ -65,7 +65,8 @@ namespace MMO_RPG
 
         public Unit GetUnit(int x, int y)
         {
-  
+            Unit test = new Assasin();
+            return test;
         }
 
         public GameFieldIterator CreateIterator()
