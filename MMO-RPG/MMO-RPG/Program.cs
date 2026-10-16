@@ -6,7 +6,7 @@ namespace MMO_RPG
     {
         public static void Main()
         {
-            Console.WriteLine("Start");
+            
         }
     }
 }
