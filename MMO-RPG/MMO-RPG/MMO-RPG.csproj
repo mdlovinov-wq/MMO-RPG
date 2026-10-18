@@ -41,12 +41,18 @@
     <Compile Include="Attack.cs" />
     <Compile Include="AttackRange.cs" />
     <Compile Include="AttackSpeed.cs" />
+    <Compile Include="BountyHunter.cs" />
     <Compile Include="GameField.cs" />
+    <Compile Include="Healer.cs" />
     <Compile Include="Health.cs" />
-    <Compile Include="IUnitFabric.cs" />
+    <Compile Include="IUnitFactory.cs" />
+    <Compile Include="Knight.cs" />
     <Compile Include="Mage.cs" />
+    <Compile Include="PhantomAssasin.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Sorcerer.cs" />
     <Compile Include="Swordsman.cs" />
+    <Compile Include="Tank.cs" />
     <Compile Include="Unit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
