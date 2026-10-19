@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Runtime.CompilerServices;
 
 namespace MMO_RPG
 {
@@ -30,7 +31,27 @@ namespace MMO_RPG
 
         public void AddUnit(Unit unit, int x, int y)
         {
-
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                throw new ArgumentException("Coordinates must be between width and height");
+            }
+            if (unit == null)
+            {
+                throw new ArgumentException(nameof(unit));
+            }
+            if (GetUnit(x, y) == null)
+            {
+                if (units.Count >= maxUnits)
+                {
+                    throw new InvalidOperationException("Maximum number of units reached");
+                }
+                unit.Move(x, y);
+                units.Add(unit);
+            }
+            else
+            {
+                throw new InvalidOperationException("Cell is already occupied");
+            }
         }
 
         public void DeleteUnit(Unit unit)
@@ -65,8 +86,55 @@ namespace MMO_RPG
 
         public Unit GetUnit(int x, int y)
         {
-            Unit test = new Assasin();
-            return test;
+            foreach (Unit unit in units)
+            {
+                if (unit.X == x && unit.Y == y)
+                {
+                    return unit;
+                }
+            }
+            throw new InvalidOperationException("Unit doesn't exist");
+        }
+
+        public void FillWithUnits(IUnitFactory factory, int count)
+        {
+
+            if (factory == null)
+            {
+                throw new ArgumentException(nameof(factory));
+            }
+
+            if (count < 0)
+            {
+                throw new ArgumentException(nameof(count));
+            }
+            int coordX = 0;
+            int coordY = 0;
+            while (count != 0)
+            {
+
+                if (coordX >= width)
+                {
+                    coordX = 0;
+                    coordY++;
+                }
+
+                if (coordX < 0 || coordY < 0 || coordY >= height)
+                {
+                    throw new InvalidOperationException("Too many units for this size of field");
+                }
+
+                if (GetUnit(coordX, coordY) == null)
+                {
+                    Unit unit = factory.CreateUnit(coordX, coordY);
+
+                    AddUnit(unit, coordX, coordY);
+                    count--;
+                }
+
+                coordX++;
+
+            }
         }
 
         public GameFieldIterator CreateIterator()
