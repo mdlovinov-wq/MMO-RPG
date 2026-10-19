@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.CompilerServices;
 
 namespace MMO_RPG
 {
@@ -54,8 +52,17 @@ namespace MMO_RPG
             }
         }
 
-        public void DeleteUnit(Unit unit)
+        public void RemoveUnit(Unit unit)
         {
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+
+            if (!units.Remove(unit))
+            {
+                throw new InvalidOperationException("Unit doesn't exist");
+            }
 
         }
 
