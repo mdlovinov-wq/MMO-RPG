@@ -15,6 +15,11 @@ namespace MMO_RPG
             this.attackRange = attackRange;
         }
 
+        public AttackRange(AttackRange other)
+        {
+            attackRange = other.attackRange;
+        }
+
         public void DecreaseRange(int amount)
         {
             if (amount <= 0)

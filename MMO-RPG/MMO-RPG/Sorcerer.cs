@@ -12,9 +12,11 @@ namespace MMO_RPG
         {
         }
 
+        public Sorcerer(Sorcerer other) : base(other) { }
+
         public override Unit Clone()
         {
-            return new Sorcerer(X, Y);
+            return new Sorcerer(this);
         }
 
         public override string GetUnitType()

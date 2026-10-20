@@ -14,6 +14,11 @@ namespace MMO_RPG
             }   
             throw new ArgumentException("Initial health must be positive");
         }
+
+        public Health(Health other)
+        {
+            health = other.health;
+        }
         
         public void Decrease(int amount)
         {

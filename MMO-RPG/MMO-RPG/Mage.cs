@@ -15,5 +15,8 @@ namespace MMO_RPG
             attackSpeed)
         { }
 
+        protected Mage(Mage other) : base(other)
+        {
+        }
     }
 }

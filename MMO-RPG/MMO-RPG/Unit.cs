@@ -28,6 +28,18 @@ namespace MMO_RPG
             AttackSpeed = attackSpeed;
         }
 
+        protected Unit(Unit other)
+        {
+            X = other.X;
+            Y = other.Y;
+
+            Health = new Health(other.Health);
+            Armor = new Armor(other.Armor);
+            Attack = new Attack(other.Attack);
+            AttackRange = new AttackRange(other.AttackRange);
+            AttackSpeed = new AttackSpeed(other.AttackSpeed);
+        }
+
         public virtual void Move(int x, int y)
         {
             X = x;

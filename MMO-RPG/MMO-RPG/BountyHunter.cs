@@ -12,9 +12,11 @@ namespace MMO_RPG
         {
         }
 
+        public BountyHunter(BountyHunter other) : base(other) { }
+
         public override Unit Clone()
         {
-            return new BountyHunter(X, Y);
+            return new BountyHunter(this);
         }
 
         public override string GetUnitType()

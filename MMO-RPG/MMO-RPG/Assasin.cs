@@ -14,5 +14,9 @@ namespace MMO_RPG
             attackSpeed)
         {
         }
+
+        protected Assasin(Assasin other) : base(other)
+        {
+        }
     }
 }

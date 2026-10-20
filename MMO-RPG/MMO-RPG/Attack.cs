@@ -15,6 +15,11 @@ namespace MMO_RPG
             this.damage = damage;
         }
 
+        public Attack(Attack other)
+        {
+            damage = other.damage;
+        }
+
         public int CalculateDamage(Armor targetArmor)
         {
             return targetArmor.ReduceDamage(damage);

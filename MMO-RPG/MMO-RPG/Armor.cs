@@ -15,6 +15,11 @@ namespace MMO_RPG
             this.armor = armor;
         }
 
+        public Armor(Armor other)
+        {
+            armor = other.armor;
+        }
+
         public int ReduceDamage(int damage)
         {
             if (damage < 0)

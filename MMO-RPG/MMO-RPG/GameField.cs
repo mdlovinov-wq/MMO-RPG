@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MMO_RPG
 {
-    class GameField
+    class GameField : IEnumerable<Unit>
     {
         private int width;
         private int height;
@@ -64,6 +65,24 @@ namespace MMO_RPG
                 throw new InvalidOperationException("Unit doesn't exist");
             }
 
+        }
+
+        public int Size()
+        {
+            return units.Count;
+        }
+
+        public bool IsEmpty()
+        {
+            return units.Count == 0;
+        }
+
+        public void Clear()
+        {
+            foreach (Unit unit in units)
+            {
+                RemoveUnit(unit);
+            }
         }
 
         public GameField CloneField()
@@ -142,6 +161,19 @@ namespace MMO_RPG
                 coordX++;
 
             }
+        }
+
+        public IEnumerator<Unit> GetEnumerator()
+        {
+            foreach(Unit unit in units)
+            {
+                yield return unit;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         public GameFieldIterator CreateIterator()

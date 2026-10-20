@@ -9,8 +9,11 @@ namespace MMO_RPG
             IUnitFactory tankFactory = new TankFactory();
             IUnitFactory sorcererFactory = new SorcererFactory();
 
-            Unit tank = tankFactory.CreateUnit(1, 1);
-            Unit sorcerer = sorcererFactory.CreateUnit(12, 2);
+            Unit tank = new Tank(1, 1);
+            Unit tank2 = tank.Clone();
+            tank2.Health.Decrease(20);
+            tank2.Move(2, 2);
+            return;
         }
     }
 }

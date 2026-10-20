@@ -13,9 +13,11 @@ namespace MMO_RPG
         {
         }
 
+        public PhantomAssasin(PhantomAssasin other) : base(other) { }
+
         public override Unit Clone()
         {
-            return new PhantomAssasin(X, Y);
+            return new PhantomAssasin(this);
         }
 
         public override string GetUnitType()

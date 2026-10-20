@@ -10,12 +10,13 @@ namespace MMO_RPG
             new Attack(10), new AttackRange(5),
             new AttackSpeed(1))
         {
-
         }
+
+        public Healer(Healer other) : base(other) { }
 
         public override Unit Clone()
         {
-            return new Healer(X, Y);
+            return new Healer(this);
         }
 
         public override string GetUnitType()

@@ -14,6 +14,11 @@ namespace MMO_RPG
             this.attackSpeed = attackSpeed;
         }
 
+        public AttackSpeed(AttackSpeed other)
+        {
+            attackSpeed = other.attackSpeed;
+        }
+
         public void DecreaseSpeed(int amount)
         {
             if (amount <= 0)

@@ -14,9 +14,11 @@ namespace MMO_RPG
 
         }
 
+        public Tank(Tank other) : base(other) { }
+
         public override Unit Clone()
         {
-            return new Tank(X, Y);
+            return new Tank(this);
         }
 
         public override string GetUnitType()

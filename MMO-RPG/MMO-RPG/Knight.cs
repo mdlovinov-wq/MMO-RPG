@@ -12,9 +12,11 @@ namespace MMO_RPG
         {
         }
 
+        public Knight(Knight other) : base(other) { }
+
         public override Unit Clone()
         {
-            return new Knight(X, Y);
+            return new Knight(this);
         }
 
         public override string GetUnitType()

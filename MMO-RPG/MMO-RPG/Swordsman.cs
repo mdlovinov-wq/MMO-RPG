@@ -15,5 +15,9 @@ namespace MMO_RPG
             attackSpeed)
         { }
 
+        protected Swordsman(Swordsman other) : base(other)
+        {
+        }
+
     }
 }
