@@ -79,16 +79,21 @@ namespace MMO_RPG
 
         public void Clear()
         {
-            foreach (Unit unit in units)
-            {
-                RemoveUnit(unit);
-            }
+            units.Clear();
         }
 
         public GameField CloneField()
         {
-            GameField other = new GameField(0, 0, 1);
-            return other;
+            GameField copy = new GameField(width, height, maxUnits);
+
+            foreach(Unit unit in units)
+            {
+                Unit clone = unit.Clone();
+                copy.AddUnit(clone, clone.X, clone.Y);
+            }
+
+            return copy;
+            
         }
 
         public void MoveFrom(GameField other)
@@ -119,7 +124,7 @@ namespace MMO_RPG
                     return unit;
                 }
             }
-            throw new InvalidOperationException("Unit doesn't exist");
+            return null;
         }
 
         public void FillWithUnits(IUnitFactory factory, int count)
@@ -165,7 +170,7 @@ namespace MMO_RPG
 
         public IEnumerator<Unit> GetEnumerator()
         {
-            foreach(Unit unit in units)
+            foreach(Unit unit in units.ToArray())
             {
                 yield return unit;
             }

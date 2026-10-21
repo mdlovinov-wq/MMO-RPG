@@ -48,5 +48,10 @@ namespace MMO_RPG
             return health == 0;
         }
 
+        public int CountHealthPoints()
+        {
+            return health;
+        }
+
     }
 }
