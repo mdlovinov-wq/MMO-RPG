@@ -40,7 +40,7 @@ namespace MMO_RPG
             AttackSpeed = new AttackSpeed(other.AttackSpeed);
         }
 
-        public virtual void Move(int x, int y)
+        internal virtual void Move(int x, int y)
         {
             X = x;
             Y = y;

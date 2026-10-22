@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MMO_RPG
 {
@@ -39,13 +40,20 @@ namespace MMO_RPG
 
         public void AddUnit(Unit unit, int x, int y)
         {
+
+            if (unit == null)
+            {
+                throw new ArgumentException(nameof(unit));
+            }
+
             if (x < 0 || x >= width || y < 0 || y >= height)
             {
                 throw new ArgumentException("Coordinates must be between width and height");
             }
-            if (unit == null)
+            
+            if (units.Any(u => ReferenceEquals(u, unit)))
             {
-                throw new ArgumentException(nameof(unit));
+                throw new InvalidOperationException("Unit already exists on this field");
             }
             if (GetUnit(x, y) == null)
             {
@@ -128,6 +136,34 @@ namespace MMO_RPG
             return null;
         }
 
+        public void MoveUnit(Unit unit, int x, int y)
+        {
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+
+            if (!units.Contains(unit))
+            {
+                throw new InvalidOperationException("Unit doesn't exist on this field");
+            }
+
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                throw new ArgumentException("Coordinates outside the field");
+            }
+
+            Unit otherUnit = GetUnit(x, y);
+
+            if (otherUnit != null && ReferenceEquals(unit, otherUnit))
+            {
+                throw new InvalidOperationException("Cell is already occupied");
+            }
+
+            unit.Move(x, y);
+
+        }
+
         public void FillWithUnits(IUnitFactory factory, int count)
         {
 
@@ -182,34 +218,5 @@ namespace MMO_RPG
             return GetEnumerator();
         }
 
-        public GameFieldIterator CreateIterator()
-        {
-            return new GameFieldIterator(units);
-        }
-
-    }
-
-    class GameFieldIterator
-    {
-        private readonly List<Unit> units;
-        int position = 0;
-        public GameFieldIterator(List<Unit> units)
-        {
-            this.units = units;
-        }
-
-        public bool HasNext()
-        {
-            return position < units.Count;
-        }
-
-        public Unit Next()
-        {
-            if (!HasNext())
-            {
-                throw new InvalidOperationException("There's no next unit");
-            }
-            return units[position++];
-        }
     }
 }

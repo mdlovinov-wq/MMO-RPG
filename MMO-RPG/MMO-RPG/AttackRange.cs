@@ -26,12 +26,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Debuff must be positive");
             }
-            if (amount > attackRange)
-            {
-                attackRange = 1;
-                return;
-            }
-            attackRange -= amount;
+            attackRange = Math.Max(1, attackRange - amount);
         }
 
         public void IncreaseRange(int amount)

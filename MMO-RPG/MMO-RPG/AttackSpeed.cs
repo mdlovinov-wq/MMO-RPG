@@ -25,12 +25,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Debuff must be positive");
             }
-            if (amount > attackSpeed)
-            {
-                attackSpeed = 1;
-                return;
-            }
-            attackSpeed -= amount;
+            attackSpeed = Math.Max(1, attackSpeed - amount);
         }
 
         public void IncreaseSpeed(int amount)
