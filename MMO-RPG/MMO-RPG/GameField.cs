@@ -28,6 +28,15 @@ namespace MMO_RPG
             units = new List<Unit>();
         }
 
+        public GameField(GameField other) : this(other.width, other.height, other.maxUnits)
+        {
+            foreach(Unit unit in other.units)
+            {
+                Unit clone = unit.Clone();
+                AddUnit(clone, clone.X, clone.Y);
+            }
+        }
+
         public void AddUnit(Unit unit, int x, int y)
         {
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -84,35 +93,27 @@ namespace MMO_RPG
 
         public GameField CloneField()
         {
-            GameField copy = new GameField(width, height, maxUnits);
-
-            foreach(Unit unit in units)
-            {
-                Unit clone = unit.Clone();
-                copy.AddUnit(clone, clone.X, clone.Y);
-            }
-
-            return copy;
+            return new GameField(this);
             
         }
-
-        public void MoveFrom(GameField other)
+        
+        public static GameField CreateByMoving(GameField other)
         {
-            if (ReferenceEquals(this, other))
+            if (other == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(other));
             }
-            this.units = other.units;
+
+            GameField newField = new GameField(
+                other.width,
+                other.height,
+                other.maxUnits
+                );
+
+            newField.units = other.units;
             other.units = new List<Unit>();
 
-            this.width = other.width;
-            other.width = 0;
-
-            this.height = other.height;
-            other.height = 0;
-
-            this.maxUnits = other.maxUnits;
-            other.maxUnits = 0;
+            return newField;
         }
 
         public Unit GetUnit(int x, int y)

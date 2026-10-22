@@ -29,7 +29,7 @@ namespace MMO_RPG
             Console.WriteLine();
             Console.WriteLine("Third scenary:");
             GameField thirdField = new GameField(10, 10, 3);
-            thirdField.MoveFrom(secondField);
+            thirdField = GameField.CreateByMoving(secondField);
             Console.WriteLine(secondField.Size());
             Console.WriteLine(thirdField.Size());
 
