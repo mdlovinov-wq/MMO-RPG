@@ -136,6 +136,16 @@ namespace MMO_RPG
             return null;
         }
 
+        public Unit GetUnit(int index)
+        {
+            if (index < 0 || index >= units.Count)
+            {
+                throw new ArgumentOutOfRangeException("Index out of range");
+            }
+
+            return units[index];
+        }
+
         public void MoveUnit(Unit unit, int x, int y)
         {
             if (unit == null)

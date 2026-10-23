@@ -10,13 +10,16 @@ namespace MMO_RPG
 
             Console.WriteLine("First scenary:");
             GameField firstField = new GameField(14, 14, 120);
-            IUnitFactory factory = new PhantomAssasinFactory();
-            firstField.FillWithUnits(factory, 111);
+            IUnitFactory factoryPhantomAssasin = new PhantomAssasinFactory();
+            IUnitFactory factoryTank = new TankFactory();
+            firstField.FillWithUnits(factoryPhantomAssasin, 50);
+            firstField.FillWithUnits(factoryTank, 55);
 
             foreach (Unit unit in firstField)
             {
                 Console.WriteLine(unit.GetUnitType());
             }
+
             Console.WriteLine();
             Console.WriteLine("Second scenary:"); 
             GameField secondField = firstField.CloneField();
