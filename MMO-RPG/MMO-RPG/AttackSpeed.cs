@@ -4,19 +4,23 @@ namespace MMO_RPG
 {
     class AttackSpeed
     {
-        private int attackSpeed;
+        public int Current
+        {
+            get;
+            private set;
+        }
         public AttackSpeed(int attackSpeed)
         {
             if (attackSpeed <= 0)
             {
                 throw new ArgumentException("Attack speed must be positive");
             }
-            this.attackSpeed = attackSpeed;
+            Current = attackSpeed;
         }
 
         public AttackSpeed(AttackSpeed other)
         {
-            attackSpeed = other.attackSpeed;
+            Current = other.Current;
         }
 
         public void DecreaseSpeed(int amount)
@@ -25,7 +29,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Debuff must be positive");
             }
-            attackSpeed = Math.Max(1, attackSpeed - amount);
+            Current = Math.Max(1, Current - amount);
         }
 
         public void IncreaseSpeed(int amount)
@@ -34,7 +38,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Buff must be positive");
             }
-            attackSpeed += amount;
+            Current += amount;
         }
     }
 }

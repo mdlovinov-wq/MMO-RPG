@@ -4,7 +4,11 @@ namespace MMO_RPG
 {
     class Attack
     {
-        private int damage;
+        public int Damage
+        {
+            get;
+            private set;
+        }
 
         public Attack(int damage)
         {
@@ -12,19 +16,17 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Damage must be positive");
             }
-            this.damage = damage;
+            Damage = damage;
         }
 
         public Attack(Attack other)
         {
-            damage = other.damage;
+            Damage = other.Damage;
         }
 
-        public int CalculateDamage(Armor targetArmor)
+        public int CalculateDamage(Armor targetArmor, DamageResist targetResist)
         {
-            return targetArmor.ReduceDamage(damage);
+            return targetArmor.ReduceDamage(Damage) * (1 - targetResist.Current);
         }
-
-
     }
 }

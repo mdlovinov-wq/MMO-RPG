@@ -32,8 +32,8 @@ namespace MMO_RPG
             Console.WriteLine();
             Console.WriteLine("Third scenary:");
             GameField thirdField = GameField.CreateByMoving(secondField);
-            Console.WriteLine(secondField.Size());
-            Console.WriteLine(thirdField.Size());
+            Console.WriteLine(secondField.UnitsCount());
+            Console.WriteLine(thirdField.UnitsCount());
 
             Console.WriteLine();
             Console.WriteLine("Fourth scenary:");
@@ -47,16 +47,16 @@ namespace MMO_RPG
             {
                 thirdField.RemoveUnit(unit);
             }
-            Console.WriteLine(thirdField.Size());
+            Console.WriteLine(thirdField.UnitsCount());
 
             Console.WriteLine();
             Console.WriteLine("Fifth scenary:");
-            Console.WriteLine(firstField.Size());
+            Console.WriteLine(firstField.UnitsCount());
             foreach (Unit unit in firstField)
             {
                 firstField.RemoveUnit(unit);
             }
-            Console.WriteLine(firstField.Size());
+            Console.WriteLine(firstField.UnitsCount());
         }
     }
 }

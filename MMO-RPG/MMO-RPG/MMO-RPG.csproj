@@ -41,8 +41,10 @@
     <Compile Include="Attack.cs" />
     <Compile Include="AttackRange.cs" />
     <Compile Include="AttackSpeed.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="BountyHunter.cs" />
     <Compile Include="BountyHunterFactory.cs" />
+    <Compile Include="DamageResist.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="Healer.cs" />
     <Compile Include="HealerFactory.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Knight.cs" />
     <Compile Include="KnightFactory.cs" />
     <Compile Include="Mage.cs" />
+    <Compile Include="MoveSpeed.cs" />
     <Compile Include="PhantomAssasin.cs" />
     <Compile Include="PhantomAssasinFactory.cs" />
     <Compile Include="Program.cs" />

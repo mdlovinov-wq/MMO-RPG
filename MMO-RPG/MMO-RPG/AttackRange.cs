@@ -4,7 +4,11 @@ namespace MMO_RPG
 {
     class AttackRange
     {
-        private int attackRange;
+        public int Current
+        {
+            get;
+            private set;
+        }
 
         public AttackRange(int attackRange)
         {
@@ -12,12 +16,12 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Attack range must be positive");
             }
-            this.attackRange = attackRange;
+            Current = attackRange;
         }
 
         public AttackRange(AttackRange other)
         {
-            attackRange = other.attackRange;
+            Current = other.Current;
         }
 
         public void DecreaseRange(int amount)
@@ -26,7 +30,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Debuff must be positive");
             }
-            attackRange = Math.Max(1, attackRange - amount);
+            Current = Math.Max(1, Current - amount);
         }
 
         public void IncreaseRange(int amount)
@@ -35,7 +39,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Buff must be positive");
             }
-            attackRange += amount;
+            Current += amount;
         }
     }
 }
