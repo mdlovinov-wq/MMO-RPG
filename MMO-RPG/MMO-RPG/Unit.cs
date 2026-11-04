@@ -43,7 +43,7 @@ namespace MMO_RPG
         internal virtual void Move(int x, int y)
         {
             X = x;
-            Y = y;
+            Y = y; 
         }
 
         public abstract Unit Clone();

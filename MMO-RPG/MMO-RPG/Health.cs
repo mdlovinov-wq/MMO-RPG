@@ -4,20 +4,31 @@ namespace MMO_RPG
 {
     class Health
     {
-        private int health;
+
+        public int Current
+        {
+            get;
+            private set;
+        }
+        public int Max
+        {
+            get;
+            private set;
+        }
         public Health(int initHealth)
         {
             if (initHealth > 0)
             {
-                health = initHealth;
+                Current = initHealth;
+                Max = initHealth;
                 return;
             }   
-            throw new ArgumentException("Initial health must be positive");
+            throw new ArgumentOutOfRangeException("Initial health must be positive");
         }
 
         public Health(Health other)
         {
-            health = other.health;
+            Current = other.Current;
         }
         
         public void Decrease(int amount)
@@ -26,12 +37,12 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Damage must be positive");
             }
-            if (amount > health)
+            if (amount > Current)
             {
-                health = 0;
+                Current = 0;
                 return;
             }
-            health -= amount;
+            Current -= amount;
         }
 
         public void Increase(int amount)
@@ -40,17 +51,17 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Heal must be positive");
             }
-            health += amount;
+            Current = Math.Min(Current + amount, Max); 
         }
 
-        public bool IsZero()
+        public bool IsDead()
         {
-            return health == 0;
+            return Current == 0;
         }
 
         public int CountHealthPoints()
         {
-            return health;
+            return Current;
         }
 
     }

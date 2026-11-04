@@ -17,7 +17,7 @@ namespace MMO_RPG
 
         public Armor(Armor other)
         {
-            armor = other.armor;
+            armor = other.armor;    
         }
 
         public int ReduceDamage(int damage)

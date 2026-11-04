@@ -84,7 +84,7 @@ namespace MMO_RPG
 
         }
 
-        public int Size()
+        public int UnitsCount()
         {
             return units.Count;
         }
@@ -227,6 +227,5 @@ namespace MMO_RPG
         {
             return GetEnumerator();
         }
-
     }
 }
