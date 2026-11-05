@@ -7,17 +7,17 @@ namespace MMO_RPG
     {
         public double GetDefenseBonus(Unit unit)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public double GetSpeedModifier(Unit unit)
         {
-            throw new NotImplementedException();
+            return 1;
         }
 
         public bool IsPassable(Unit unit)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

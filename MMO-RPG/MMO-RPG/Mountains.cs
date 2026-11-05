@@ -6,17 +6,21 @@ namespace MMO_RPG
     {
         public double GetDefenseBonus(Unit unit)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public double GetSpeedModifier(Unit unit)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public bool IsPassable(Unit unit)
         {
-            throw new NotImplementedException();
+            if (unit.GetUnitType() != "Sorcerer" && unit.GetUnitType() != "Healer")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

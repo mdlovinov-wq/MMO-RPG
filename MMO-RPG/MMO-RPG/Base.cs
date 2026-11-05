@@ -21,6 +21,8 @@ namespace MMO_RPG
 
         public int MaxUnits { get; private set; }
 
+        public int Resources { get; private set; }
+
         public int X { get; private set; }
         public int Y { get; private set; }
         public Base(int x, int y, int maxUnits, Health initHealth, DamageResist defenseLevel)
@@ -30,6 +32,7 @@ namespace MMO_RPG
             MaxUnits = maxUnits;
             Health = initHealth;
             DefenseLevel = defenseLevel;
+            Resources = 10;
         }
 
         public Base(Base other)
@@ -65,6 +68,15 @@ namespace MMO_RPG
             Unit unit = factory.CreateUnit(x, y);
             units.Add(unit);
             return unit;
+        }
+
+        public void IncreaseResources(int amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Count of amount new resources must be positive");
+            }
+            Resources += amount;
         }
 
     }

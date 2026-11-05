@@ -10,9 +10,15 @@ namespace MMO_RPG
         private int width;
         private int height;
         private int maxUnits;
+        private int maxBases;
         private List<Unit> units;
+        private List<Base> bases;
+        public TerrainMap TerrainMap
+        {
+            get;
+        }
 
-        public GameField(int width, int height, int maxUnits)
+        public GameField(int width, int height, int maxUnits, int maxBases)
         {
             if (width <= 0 || height <= 0)
             {
@@ -22,14 +28,21 @@ namespace MMO_RPG
             {
                 throw new ArgumentException("Count of units must be positive");
             }
+            if (maxBases <= 0)
+            {
+                throw new ArgumentException("Count of bases must be positive");
+            }
             this.width = width;
             this.height = height;
             this.maxUnits = maxUnits;
+            this.maxBases = maxBases;
 
             units = new List<Unit>();
+            bases = new List<Base>();
+            TerrainMap = new TerrainMap(width, height);
         }
 
-        public GameField(GameField other) : this(other.width, other.height, other.maxUnits)
+        public GameField(GameField other) : this(other.width, other.height, other.maxUnits, other.maxBases)
         {
             foreach(Unit unit in other.units)
             {
@@ -115,11 +128,14 @@ namespace MMO_RPG
             GameField newField = new GameField(
                 other.width,
                 other.height,
-                other.maxUnits
+                other.maxUnits,
+                other.maxBases
                 );
 
             newField.units = other.units;
             other.units = new List<Unit>();
+            newField.bases = other.bases;
+            other.bases = new List<Base>();
 
             return newField;
         }
