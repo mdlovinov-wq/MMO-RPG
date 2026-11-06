@@ -68,7 +68,7 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("Unit already exists on this field");
             }
-            if (GetUnit(x, y) == null)
+            if (GetUnit(x, y) == null && GetBase(x, y) == null)
             {
                 if (units.Count >= maxUnits)
                 {
@@ -76,6 +76,37 @@ namespace MMO_RPG
                 }
                 unit.Move(x, y);
                 units.Add(unit);
+            }
+            else
+            {
+                throw new InvalidOperationException("Cell is already occupied");
+            }
+        }
+
+        public void AddBase(Base gameBase, int x, int y)
+        {
+
+            if (gameBase == null)
+            {
+                throw new ArgumentException(nameof(gameBase));
+            }
+
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                throw new ArgumentException("Coordinates must be between width and height");
+            }
+
+            if (bases.Any(b => ReferenceEquals(b, gameBase)))
+            {
+                throw new InvalidOperationException("Base already exists on this field");
+            }
+            if (GetUnit(x, y) == null && GetBase(x, y) == null)
+            {
+                if (bases.Count >= maxBases)
+                {
+                    throw new InvalidOperationException("Maximum number of bases reached");
+                }
+                bases.Add(gameBase);
             }
             else
             {
@@ -97,19 +128,38 @@ namespace MMO_RPG
 
         }
 
+        public void RemoveBase(Base gameBase)
+        {
+            if (gameBase == null)
+            {
+                throw new ArgumentNullException(nameof(gameBase));
+            }
+
+            if (!bases.Remove(gameBase))
+            {
+                throw new InvalidOperationException("Base doesn't exist");
+            }
+
+        }
+
         public int UnitsCount()
         {
             return units.Count;
         }
+        public int BasesCount()
+        {
+            return bases.Count;
+        }
 
         public bool IsEmpty()
         {
-            return units.Count == 0;
+            return units.Count == 0 && bases.Count == 0;
         }
 
         public void Clear()
         {
             units.Clear();
+            bases.Clear();
         }
 
         public GameField CloneField()
@@ -162,6 +212,28 @@ namespace MMO_RPG
             return units[index];
         }
 
+        public Base GetBase(int x, int y)
+        {
+            foreach (Base gameBase in bases)
+            {
+                if (gameBase.X == x && gameBase.Y == y)
+                {
+                    return gameBase;
+                }
+            }
+            return null;
+        }
+
+        public Base GetBase(int index)
+        {
+            if (index < 0 || index >= bases.Count)
+            {
+                throw new ArgumentOutOfRangeException("Index out of range");
+            }
+
+            return bases[index];
+        }
+
         public void MoveUnit(Unit unit, int x, int y)
         {
             if (unit == null)
@@ -188,6 +260,15 @@ namespace MMO_RPG
 
             unit.Move(x, y);
 
+        }
+
+        public bool IsCellFree(int x, int y)
+        {
+            if (GetBase(x, y) != null || GetUnit(x, y) != null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void FillWithUnits(IUnitFactory factory, int count)
@@ -243,5 +324,14 @@ namespace MMO_RPG
         {
             return GetEnumerator();
         }
+
+        public IEnumerable<Base> GetBases()
+        {
+            foreach (Base gameBase in bases.ToArray())
+            {
+                yield return gameBase;
+            }
+        }
+
     }
 }

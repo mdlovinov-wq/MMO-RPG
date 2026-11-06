@@ -25,14 +25,31 @@ namespace MMO_RPG
 
         public int X { get; private set; }
         public int Y { get; private set; }
-        public Base(int x, int y, int maxUnits, Health initHealth, DamageResist defenseLevel)
+        public Base(int x, int y, int maxUnits, Health initHealth, DamageResist defenseLevel, int resources)
         {
+            if (x < 0 || y < 0)
+                throw new ArgumentOutOfRangeException(nameof(x), "Coordinates cannot be negative");
+
+            if (maxUnits <= 0)
+                throw new ArgumentOutOfRangeException(nameof(maxUnits), "MaxUnits must be positive");
+
+            if (resources < 0)
+                throw new ArgumentOutOfRangeException(nameof(resources), "Resources cannot be negative");
+            if (initHealth == null)
+            {
+                throw new ArgumentNullException(nameof(initHealth));
+            }
+            if (defenseLevel == null)
+            {
+                throw new ArgumentNullException(nameof(defenseLevel));
+            }
             X = x;
             Y = y;
             MaxUnits = maxUnits;
-            Health = initHealth;
-            DefenseLevel = defenseLevel;
-            Resources = 10;
+            Resources = resources;
+
+            Health = new Health(initHealth);
+            DefenseLevel = new DamageResist(defenseLevel);
         }
 
         public Base(Base other)
@@ -56,6 +73,10 @@ namespace MMO_RPG
 
         public Unit CreateUnit(IUnitFactory factory, int x, int y)
         {
+            if (Resources < 3)
+            {
+                throw new InvalidOperationException("Not enough resources for creating");
+            }
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -67,6 +88,7 @@ namespace MMO_RPG
             }
             Unit unit = factory.CreateUnit(x, y);
             units.Add(unit);
+            Resources -= 3;
             return unit;
         }
 

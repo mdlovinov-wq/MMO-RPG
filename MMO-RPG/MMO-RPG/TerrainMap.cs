@@ -48,7 +48,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentNullException(nameof(terrain));
             }
-            terrains[x, y] = terrain;
+            terrains[x, y] = terrain is TerrainProxy ? terrain : new TerrainProxy(terrain);
         }
 
         public ITerrain GetTerrain(int x, int y)

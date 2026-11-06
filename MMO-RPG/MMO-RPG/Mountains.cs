@@ -22,5 +22,10 @@ namespace MMO_RPG
             }
             return false;
         }
+
+        public bool IsStuck(Unit unit)
+        {
+            return false;
+        }
     }
 }

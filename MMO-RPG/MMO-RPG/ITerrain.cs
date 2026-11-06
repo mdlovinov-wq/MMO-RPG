@@ -8,6 +8,7 @@ namespace MMO_RPG
         bool IsPassable(Unit unit);
         double GetSpeedModifier(Unit unit);
         double GetDefenseBonus(Unit unit);
+        bool IsStuck(Unit unit);
 
     }
 }
