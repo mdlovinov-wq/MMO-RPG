@@ -29,7 +29,7 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("Base doesn't exist on field");
             }
-            if (!gameField.IsCellFree(x, y))
+            if (!gameField.IsCellValid(x, y))
             {
                 throw new InvalidOperationException("You can't create unit here");
             }
@@ -41,7 +41,7 @@ namespace MMO_RPG
 
         public Base CreateBase(int x, int y, int maxUnits)
         {
-            if (!gameField.IsCellFree(x, y))
+            if (!gameField.IsCellValid(x, y))
             {
                 throw new InvalidOperationException("You can't create base here");
             }
@@ -53,7 +53,36 @@ namespace MMO_RPG
 
         public void MoveUnit(Unit unit, int x, int y)
         {
-            
+
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+
+            if (!gameField.IsCellValid(x, y))
+            {
+                throw new InvalidOperationException("You can't move unit here");
+            }
+
+            if (gameField.GetUnit(unit.X, unit.Y) != unit)
+            {
+                throw new InvalidOperationException("Unit doesn't exist on field");
+            }
+
+            ITerrain terrain = gameField.TerrainMap.GetTerrain(x, y);
+            if (terrain.IsStuck(unit))
+            {
+                throw new InvalidOperationException("Unit stucked");
+            }
+
+            if (!terrain.IsPassable(unit))
+            {
+                throw new InvalidOperationException("Terrain is not passable");
+
+            }
+            gameField.MoveUnit(unit, x, y);
+            unit.SetTerrainDefenseBonus(terrain.GetDefenseBonus(unit));
+            unit.SetTerrainSpeedBonus(terrain.GetSpeedModifier(unit));
         }
 
     }

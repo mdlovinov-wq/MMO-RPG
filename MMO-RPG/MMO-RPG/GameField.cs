@@ -262,7 +262,7 @@ namespace MMO_RPG
 
         }
 
-        public bool IsCellFree(int x, int y)
+        public bool IsCellValid(int x, int y)
         {
             if (GetBase(x, y) != null || GetUnit(x, y) != null)
             {
