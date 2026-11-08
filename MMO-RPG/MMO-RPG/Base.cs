@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MMO_RPG
 {
-    internal class Base
+    internal class Base : IObserver
     {
 
         private readonly List<Unit> units = new List<Unit>();
@@ -88,6 +88,7 @@ namespace MMO_RPG
             }
             Unit unit = factory.CreateUnit(x, y);
             units.Add(unit);
+            unit.Subscribe(this);
             Resources -= 3;
             return unit;
         }
@@ -101,5 +102,28 @@ namespace MMO_RPG
             Resources += amount;
         }
 
+        public void OnUnitEvent(UnitEvent unitEvent)
+        {
+            if (unitEvent.Type == UnitEventType.Died)
+            {
+                units.Remove(unitEvent.Unit);
+                unitEvent.Unit.Unsubscribe(this);
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (damage < 0)
+            {
+                throw new ArgumentNullException(nameof(damage));
+            }
+
+            if (Health.IsDead())
+            {
+                return;
+            }
+
+            Health.Decrease(damage);
+        }
     }
 }

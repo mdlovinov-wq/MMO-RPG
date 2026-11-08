@@ -20,9 +20,9 @@ namespace MMO_RPG
             return new PhantomAssasin(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "PhantomAssasin";
+            return UnitType.PhantomAssasin;
         }
 
     }

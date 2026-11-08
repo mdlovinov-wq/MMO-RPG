@@ -12,7 +12,7 @@ namespace MMO_RPG
             private set;
         }
 
-        public DamageResist(int initResist)
+        public DamageResist(double initResist)
         {
             if (initResist < 0 || initResist > 100)
             {

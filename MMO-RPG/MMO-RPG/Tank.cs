@@ -19,9 +19,9 @@ namespace MMO_RPG
             return new Tank(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "Tank";
+            return UnitType.Tank;
         }
 
     }

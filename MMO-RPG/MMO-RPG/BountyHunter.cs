@@ -19,9 +19,9 @@ namespace MMO_RPG
             return new BountyHunter(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "BountyHunter";
+            return UnitType.BountyHunter;
         }
 
     }

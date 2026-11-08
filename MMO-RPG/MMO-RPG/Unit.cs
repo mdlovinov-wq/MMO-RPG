@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 namespace MMO_RPG
 {
-    abstract class Unit
+    abstract class Unit : IObservable
     {
         public int X { get; private set; }
         public int Y { get; private set; }
@@ -58,7 +59,7 @@ namespace MMO_RPG
 
         public abstract Unit Clone();
 
-        public abstract string GetUnitType();
+        public abstract UnitType GetUnitType();
 
         internal virtual void SetTerrainDefenseBonus(double bonus)
         {
@@ -111,6 +112,53 @@ namespace MMO_RPG
                     return 100;
                 }
                 return result;
+            }
+        }
+
+        private readonly List<IObserver> observers = new List<IObserver>();
+        public void Subscribe(IObserver observer)
+        {
+            if (observer == null)
+            {
+                throw new ArgumentNullException(nameof(observer));
+            }
+            if (!observers.Contains(observer))
+            {
+                observers.Add(observer);
+            }
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void Notify(UnitEvent unitEvent)
+        {
+            foreach (IObserver observer in observers.ToArray())
+            {
+                observer.OnUnitEvent(unitEvent);
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (damage < 0)
+            {
+                throw new ArgumentNullException(nameof(damage));
+            }
+
+            if (Health.IsDead())
+            {
+                return;
+            }
+
+            Health.Decrease(damage);
+
+            Notify(new UnitEvent(this, UnitEventType.Damaged));
+            if (Health.IsDead())
+            {
+                Notify(new UnitEvent(this, UnitEventType.Died));
             }
         }
     }

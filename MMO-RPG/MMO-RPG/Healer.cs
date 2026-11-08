@@ -19,9 +19,9 @@ namespace MMO_RPG
             return new Healer(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "Healer";
+            return UnitType.Healer;
         }
 
     }

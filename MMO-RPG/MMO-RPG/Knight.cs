@@ -19,9 +19,9 @@ namespace MMO_RPG
             return new Knight(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "Knight";
+            return UnitType.Knight;
         }
 
     }

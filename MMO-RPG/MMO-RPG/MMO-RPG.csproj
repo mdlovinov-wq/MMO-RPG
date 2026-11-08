@@ -51,6 +51,8 @@
     <Compile Include="Healer.cs" />
     <Compile Include="HealerFactory.cs" />
     <Compile Include="Health.cs" />
+    <Compile Include="IObservable.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="ITerrain.cs" />
     <Compile Include="IUnitFactory.cs" />
     <Compile Include="Knight.cs" />
@@ -69,7 +71,10 @@
     <Compile Include="Tank.cs" />
     <Compile Include="TankFactory.cs" />
     <Compile Include="TerrainMap.cs" />
+    <Compile Include="TerrainProxy.cs" />
     <Compile Include="Unit.cs" />
+    <Compile Include="UnitEvent.cs" />
+    <Compile Include="UnitEventType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
