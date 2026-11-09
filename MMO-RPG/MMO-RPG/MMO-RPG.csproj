@@ -40,10 +40,12 @@
     <Compile Include="Assasin.cs" />
     <Compile Include="Attack.cs" />
     <Compile Include="AttackRange.cs" />
+    <Compile Include="AttackRangeBoost.cs" />
     <Compile Include="AttackSpeed.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="BountyHunter.cs" />
     <Compile Include="BountyHunterFactory.cs" />
+    <Compile Include="DamageBoost.cs" />
     <Compile Include="DamageResist.cs" />
     <Compile Include="Forest.cs" />
     <Compile Include="GameController.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Healer.cs" />
     <Compile Include="HealerFactory.cs" />
     <Compile Include="Health.cs" />
+    <Compile Include="IInteractionStrategy.cs" />
     <Compile Include="IObservable.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="ITerrain.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Mage.cs" />
     <Compile Include="Mountains.cs" />
     <Compile Include="MoveSpeed.cs" />
+    <Compile Include="MoveSpeedBoost.cs" />
     <Compile Include="PhantomAssasin.cs" />
     <Compile Include="PhantomAssasinFactory.cs" />
     <Compile Include="Plain.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Unit.cs" />
     <Compile Include="UnitEvent.cs" />
     <Compile Include="UnitEventType.cs" />
+    <Compile Include="UnitType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
