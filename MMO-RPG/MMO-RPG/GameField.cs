@@ -53,34 +53,37 @@ namespace MMO_RPG
 
         public void AddUnit(Unit unit, int x, int y)
         {
-
             if (unit == null)
             {
-                throw new ArgumentException(nameof(unit));
+                throw new ArgumentNullException(nameof(unit));
             }
 
             if (x < 0 || x >= width || y < 0 || y >= height)
             {
-                throw new ArgumentException("Coordinates must be between width and height");
+                throw new ArgumentException(
+                    "Coordinates must be between width and height");
             }
-            
+
             if (units.Any(u => ReferenceEquals(u, unit)))
             {
-                throw new InvalidOperationException("Unit already exists on this field");
+                throw new InvalidOperationException(
+                    "Unit already exists on this field");
             }
-            if (GetUnit(x, y) == null && GetBase(x, y) == null)
+
+            if (GetUnit(x, y) != null || GetBase(x, y) != null)
             {
-                if (units.Count >= maxUnits)
-                {
-                    throw new InvalidOperationException("Maximum number of units reached");
-                }
-                unit.Move(x, y);
-                units.Add(unit);
+                throw new InvalidOperationException(
+                    "Cell is already occupied");
             }
-            else
+
+            if (units.Count >= maxUnits)
             {
-                throw new InvalidOperationException("Cell is already occupied");
+                throw new InvalidOperationException(
+                    "Maximum number of units reached");
             }
+
+            unit.Move(x, y);
+            units.Add(unit);
         }
 
         public void AddBase(Base gameBase, int x, int y)
