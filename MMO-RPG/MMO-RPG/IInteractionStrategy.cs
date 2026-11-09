@@ -5,7 +5,7 @@ namespace MMO_RPG
     internal interface IInteractionStrategy
     {
 
-        void Apply(Unit unit);
+        void Apply(Unit unit, Base gameBase);
 
     }
 }

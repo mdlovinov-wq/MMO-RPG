@@ -125,5 +125,10 @@ namespace MMO_RPG
 
             Health.Decrease(damage);
         }
+
+        public bool IsUnitInBase(Unit unit)
+        {
+            return units.Contains(unit);
+        }
     }
 }

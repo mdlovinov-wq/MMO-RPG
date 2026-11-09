@@ -12,9 +12,14 @@ namespace MMO_RPG
             this.bonus = bonus;
         }
 
-        public void Apply(Unit unit)
+        public void Apply(Unit unit, Base gameBase)
         {
+            if (!gameBase.IsUnitInBase(unit))
+            {
+                throw new InvalidOperationException("Unit does not belong to the base");
+            }
             unit.AttackRange.IncreaseRange(bonus);
+            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MMO_RPG
             strategies = new Dictionary<UnitType, IInteractionStrategy>();
         }
 
-        public void Interact(Unit unit)
+        public virtual void Interact(Unit unit)
         {
             if (unit == null)
             {
