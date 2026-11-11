@@ -15,5 +15,20 @@ namespace MMO_RPG
             strategies[UnitType.Sorcerer] = new MoveSpeedBoost(2);
 
         }
+
+        public static Unit operator *(Unit unit, Altar altar)
+        {
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+            if (altar == null)
+            {
+                throw new ArgumentNullException(nameof(altar));
+            }
+            altar.Interact(unit);
+
+            return unit;
+        }
     }
 }

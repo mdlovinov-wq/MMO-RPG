@@ -21,6 +21,7 @@ namespace MMO_RPG
 
         public double TerrainDefenseBonus { get; private set; }
         public double TerrainSpeedBonus { get; private set; }
+        public int Resources { get; private set; }
 
         protected Unit(int x, int y, Health health, Armor armor, Attack attack,
             AttackRange attackRange, AttackSpeed attackSpeed, DamageResist damageResist, 
@@ -160,6 +161,27 @@ namespace MMO_RPG
             {
                 Notify(new UnitEvent(this, UnitEventType.Died));
             }
+        }
+
+        public void IncreaseResources(int amount)
+        {
+            if (amount < 0)
+            {
+                throw new ArgumentNullException(nameof(amount));
+            }
+            Resources += amount;
+        }
+
+        public int TakeResources()
+        {
+            int collect = Resources;
+            Resources = 0;
+            return collect;
+        }
+
+        public void MaxHealth()
+        {
+            Health.MakeHealthMax();
         }
     }
 }

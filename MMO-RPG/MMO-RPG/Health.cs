@@ -64,5 +64,10 @@ namespace MMO_RPG
             return Current;
         }
 
+        public void MakeHealthMax()
+        {
+            Current = Max;
+        }
+
     }
 }

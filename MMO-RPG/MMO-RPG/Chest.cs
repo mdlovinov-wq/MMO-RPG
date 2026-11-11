@@ -10,28 +10,33 @@ namespace MMO_RPG
 
             if (resources < 0)
             {
-                throw new ArgumentNullException(nameof(resources));
+                throw new ArgumentOutOfRangeException(nameof(resources));
             }
             Resources = resources;
-
         }
 
         public override void Interact(Unit unit)
-        {
-            throw new InvalidOperationException("Unit requires base to collect resources");
-        }
-
-        public void Collect(Unit unit, Base gameBase)
         {
             if (unit == null)
             {
                 throw new ArgumentNullException(nameof(unit));
             }
-            if (gameBase == null)
+            unit.IncreaseResources(Resources);
+        }
+
+        public static Unit operator +(Unit unit, Chest chest)
+        {
+            if (unit == null)
             {
-                throw new ArgumentNullException(nameof(gameBase));
+                throw new ArgumentNullException(nameof(unit));
             }
-            gameBase.IncreaseResources(Resources);
+            if (chest == null)
+            {
+                throw new ArgumentNullException(nameof(chest));
+            }
+            chest.Interact(unit);
+
+            return unit;
         }
     }
 }

@@ -130,5 +130,13 @@ namespace MMO_RPG
         {
             return units.Contains(unit);
         }
+
+        public void CollectResources()
+        {
+            foreach (Unit unit in units)
+            {
+                Resources += unit.TakeResources();
+            }
+        }
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Mountains.cs" />
     <Compile Include="MoveSpeed.cs" />
     <Compile Include="MoveSpeedBoost.cs" />
+    <Compile Include="NeutralObjects.cs" />
     <Compile Include="PhantomAssasin.cs" />
     <Compile Include="PhantomAssasinFactory.cs" />
     <Compile Include="Plain.cs" />

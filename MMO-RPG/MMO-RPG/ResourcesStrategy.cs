@@ -7,13 +7,19 @@ namespace MMO_RPG
 
         private int amount;
 
-        public void Apply(Unit unit, Base gameBase)
+        public ResourcesStrategy(int amount)
         {
-            if (!gameBase.IsUnitInBase(unit))
+            if (amount < 0)
             {
-                throw new InvalidOperationException("Unit does not belong to the base");
+                throw new ArgumentNullException(nameof(amount));
             }
-            gameBase.IncreaseResources(amount);
+            this.amount = amount;
+        }
+
+        public void Apply(Unit unit)
+        {
+
+            unit.IncreaseResources(amount);
 
         }
 
