@@ -36,6 +36,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Altar.cs" />
     <Compile Include="Armor.cs" />
     <Compile Include="Assasin.cs" />
     <Compile Include="Attack.cs" />
@@ -45,8 +46,10 @@
     <Compile Include="Base.cs" />
     <Compile Include="BountyHunter.cs" />
     <Compile Include="BountyHunterFactory.cs" />
+    <Compile Include="Chest.cs" />
     <Compile Include="DamageBoost.cs" />
     <Compile Include="DamageResist.cs" />
+    <Compile Include="EnergySource.cs" />
     <Compile Include="Forest.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="GameField.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="PhantomAssasinFactory.cs" />
     <Compile Include="Plain.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ResourcesStrategy.cs" />
     <Compile Include="Sorcerer.cs" />
     <Compile Include="SorcererFactory.cs" />
     <Compile Include="Swamp.cs" />
@@ -77,6 +81,8 @@
     <Compile Include="TankFactory.cs" />
     <Compile Include="TerrainMap.cs" />
     <Compile Include="TerrainProxy.cs" />
+    <Compile Include="Trap.cs" />
+    <Compile Include="TrapStrategy.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="UnitEvent.cs" />
     <Compile Include="UnitEventType.cs" />

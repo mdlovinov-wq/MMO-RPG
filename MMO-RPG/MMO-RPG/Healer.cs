@@ -8,7 +8,8 @@ namespace MMO_RPG
         public Healer(int x, int y) : base(x, y,
             new Health(80), new Armor(10),
             new Attack(10), new AttackRange(5),
-            new AttackSpeed(1))
+            new AttackSpeed(1), new DamageResist(1),
+            new MoveSpeed(2))
         {
         }
 

@@ -148,5 +148,19 @@ namespace MMO_RPG
             gameBase.TakeDamage(damage);
         }
 
+        public void CreateNeutral(NeutralObjects neutral)
+        {
+            if (neutral == null)
+            {
+                throw new ArgumentNullException(nameof(neutral));
+            }
+            if (!gameField.IsCellValid(neutral.X, neutral.Y))
+            {
+                throw new InvalidOperationException("You can't create neutral object here");
+            }
+
+            gameField.AddNeutralObject(neutral);
+        }
+
     }
 }

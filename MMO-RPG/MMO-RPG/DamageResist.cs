@@ -6,7 +6,7 @@ namespace MMO_RPG
     internal class DamageResist
     {
 
-        public int Current
+        public double Current
         {
             get;
             private set;

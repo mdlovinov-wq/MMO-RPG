@@ -8,11 +8,13 @@ namespace MMO_RPG
         protected Swordsman(int x, int y,
             Health health, Armor armor,
             Attack attack, AttackRange attackRange,
-            AttackSpeed attackSpeed) :
+            AttackSpeed attackSpeed, DamageResist damageResist,
+            MoveSpeed moveSpeed) :
             base(x, y,
             health, armor,
             attack, attackRange,
-            attackSpeed)
+            attackSpeed, damageResist,
+            moveSpeed)
         { }
 
         protected Swordsman(Swordsman other) : base(other)

@@ -8,7 +8,8 @@ namespace MMO_RPG
         public Sorcerer(int x, int y) : base(x, y,
             new Health(90), new Armor(10),
             new Attack(17), new AttackRange(6),
-            new AttackSpeed(2))
+            new AttackSpeed(2), new DamageResist(0),
+            new MoveSpeed(2))
         {
         }
 
@@ -19,9 +20,9 @@ namespace MMO_RPG
             return new Sorcerer(this);
         }
 
-        public override string GetUnitType()
+        public override UnitType GetUnitType()
         {
-            return "Sorcerer";
+            return UnitType.Sorcerer;
         }
 
     }

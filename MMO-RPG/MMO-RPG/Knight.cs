@@ -8,7 +8,8 @@ namespace MMO_RPG
         public Knight(int x, int y) : base(x, y,
             new Health(100), new Armor(30),
             new Attack(30), new AttackRange(3),
-            new AttackSpeed(3))
+            new AttackSpeed(3), new DamageResist(7),
+            new MoveSpeed(2))
         {
         }
 

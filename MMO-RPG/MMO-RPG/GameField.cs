@@ -13,6 +13,7 @@ namespace MMO_RPG
         private int maxBases;
         private List<Unit> units;
         private List<Base> bases;
+        private List<NeutralObjects> objects;
         public TerrainMap TerrainMap
         {
             get;
@@ -39,6 +40,7 @@ namespace MMO_RPG
 
             units = new List<Unit>();
             bases = new List<Base>();
+            objects = new List<NeutralObjects>();
             TerrainMap = new TerrainMap(width, height);
         }
 
@@ -115,6 +117,25 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("Cell is already occupied");
             }
+        }
+
+        public void AddNeutralObject(NeutralObjects neutralObject, int x, int y)
+        {
+            if (neutralObject == null)
+            {
+                throw new ArgumentNullException(nameof());
+            }
+
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                throw new ArgumentException("Coordinates must be between width and height");
+            }
+
+            if (IsCellValid(x, y))
+            {
+                throw new InvalidOperationException("You can't place object here");
+            }
+            objects.Add(neutralObject);
         }
 
         public void RemoveUnit(Unit unit)
@@ -267,6 +288,10 @@ namespace MMO_RPG
 
         public bool IsCellValid(int x, int y)
         {
+            if (x < 0 || x >= width || y < 0 || y >= height)
+            {
+                return false;
+            }
             if (GetBase(x, y) != null || GetUnit(x, y) != null)
             {
                 return false;
