@@ -8,55 +8,7 @@ namespace MMO_RPG
         public static void Main()
         {
 
-            Console.WriteLine("First scenary:");
-            GameField firstField = new GameField(14, 14, 120);
-            IUnitFactory factoryPhantomAssasin = new PhantomAssasinFactory();
-            IUnitFactory factoryTank = new TankFactory();
-            firstField.FillWithUnits(factoryPhantomAssasin, 50);
-            firstField.FillWithUnits(factoryTank, 55);
-
-            foreach (Unit unit in firstField)
-            {
-                Console.WriteLine(unit.GetUnitType());
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Second scenary:"); 
-            GameField secondField = firstField.CloneField();
-            Unit firstUnit = firstField.GetUnit(0, 0);
-            Unit secondUnit = secondField.GetUnit(0, 0);
-            firstUnit.Health.Decrease(10);
-            Console.WriteLine(firstUnit.Health.CountHealthPoints());
-            Console.WriteLine(secondUnit.Health.CountHealthPoints());
-
-            Console.WriteLine();
-            Console.WriteLine("Third scenary:");
-            GameField thirdField = GameField.CreateByMoving(secondField);
-            Console.WriteLine(secondField.UnitsCount());
-            Console.WriteLine(thirdField.UnitsCount());
-
-            Console.WriteLine();
-            Console.WriteLine("Fourth scenary:");
-            List<Unit> unitsToRemove = new List<Unit>();
-            foreach (Unit unit in thirdField)
-            {
-                unitsToRemove.Add(unit);
-            }
-
-            foreach (Unit unit in unitsToRemove)
-            {
-                thirdField.RemoveUnit(unit);
-            }
-            Console.WriteLine(thirdField.UnitsCount());
-
-            Console.WriteLine();
-            Console.WriteLine("Fifth scenary:");
-            Console.WriteLine(firstField.UnitsCount());
-            foreach (Unit unit in firstField)
-            {
-                firstField.RemoveUnit(unit);
-            }
-            Console.WriteLine(firstField.UnitsCount());
+            
         }
     }
 }

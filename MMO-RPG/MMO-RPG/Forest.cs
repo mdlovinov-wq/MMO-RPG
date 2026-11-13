@@ -6,7 +6,7 @@ namespace MMO_RPG
     {
         public double GetDefenseBonus(Unit unit)
         {
-            if (unit.GetUnitType() == "Sorcerer" || unit.GetUnitType() == "Healer")
+            if (unit.GetUnitType() == UnitType.Sorcerer || unit.GetUnitType() == UnitType.Healer)
             {
                 return 10;
             }
@@ -15,11 +15,11 @@ namespace MMO_RPG
 
         public double GetSpeedModifier(Unit unit)
         {
-            if (unit.GetUnitType() == "PhantomAssain" || unit.GetUnitType() == "BountyHunter")
+            if (unit.GetUnitType() == UnitType.PhantomAssasin || unit.GetUnitType() == UnitType.BountyHunter)
             {
                 return 1.5;
             }
-            if (unit.GetUnitType() == "Knight")
+            if (unit.GetUnitType() == UnitType.Knight)
             {
                 return 0.5;
             }
@@ -28,7 +28,7 @@ namespace MMO_RPG
 
         public bool IsPassable(Unit unit)
         {
-            if (unit.GetUnitType() == "Tank")
+            if (unit.GetUnitType() == UnitType.Tank)
             {
                 return false;
             }

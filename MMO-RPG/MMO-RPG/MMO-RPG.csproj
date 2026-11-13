@@ -47,6 +47,7 @@
     <Compile Include="BountyHunter.cs" />
     <Compile Include="BountyHunterFactory.cs" />
     <Compile Include="Chest.cs" />
+    <Compile Include="ConsoleRender.cs" />
     <Compile Include="DamageBoost.cs" />
     <Compile Include="DamageResist.cs" />
     <Compile Include="EnergySource.cs" />

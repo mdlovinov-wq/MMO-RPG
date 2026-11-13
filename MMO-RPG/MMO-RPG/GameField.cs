@@ -123,7 +123,7 @@ namespace MMO_RPG
         {
             if (neutralObject == null)
             {
-                throw new ArgumentNullException(nameof());
+                throw new ArgumentNullException(nameof(neutralObject));
             }
 
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -257,6 +257,29 @@ namespace MMO_RPG
 
             return bases[index];
         }
+
+        public NeutralObjects GetNeutral(int x, int y)
+        {
+            foreach (NeutralObjects neutral in objects)
+            {
+                if (neutral.X == x && neutral.Y == y)
+                {
+                    return neutral;
+                }
+            }
+            return null;
+        }
+
+        public NeutralObjects GetNeutral(int index)
+        {
+            if (index < 0 || index >= objects.Count)
+            {
+                throw new ArgumentOutOfRangeException("Index out of range");
+            }
+
+            return objects[index];
+        }
+
 
         public void MoveUnit(Unit unit, int x, int y)
         {

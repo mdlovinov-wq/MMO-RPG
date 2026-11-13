@@ -159,7 +159,7 @@ namespace MMO_RPG
                 throw new InvalidOperationException("You can't create neutral object here");
             }
 
-            gameField.AddNeutralObject(neutral);
+            gameField.AddNeutralObject(neutral, neutral.X, neutral.Y);
         }
 
     }

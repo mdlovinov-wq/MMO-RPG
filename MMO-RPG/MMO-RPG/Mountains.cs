@@ -16,7 +16,7 @@ namespace MMO_RPG
 
         public bool IsPassable(Unit unit)
         {
-            if (unit.GetUnitType() != "Sorcerer" && unit.GetUnitType() != "Healer")
+            if (unit.GetUnitType() != UnitType.Sorcer && unit.GetUnitType() != UnitType.Healer)
             {
                 return true;
             }
