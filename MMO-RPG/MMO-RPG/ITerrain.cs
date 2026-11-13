@@ -10,5 +10,7 @@ namespace MMO_RPG
         double GetDefenseBonus(Unit unit);
         bool IsStuck(Unit unit);
 
+        TerrainType GetTerrainType();
+
     }
 }

@@ -31,5 +31,7 @@ namespace MMO_RPG
             }
             strategy.Apply(unit);
         }
+
+        public abstract NeutralType GetNeutralType();
     }
 }

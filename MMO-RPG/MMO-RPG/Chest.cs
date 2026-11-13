@@ -24,6 +24,11 @@ namespace MMO_RPG
             unit.IncreaseResources(Resources);
         }
 
+        public override NeutralType GetNeutralType()
+        {
+            return NeutralType.Chest;
+        }
+
         public static Unit operator +(Unit unit, Chest chest)
         {
             if (unit == null)

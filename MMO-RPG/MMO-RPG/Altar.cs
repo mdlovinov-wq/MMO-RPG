@@ -30,5 +30,10 @@ namespace MMO_RPG
 
             return unit;
         }
+
+        public override NeutralType GetNeutralType()
+        {
+            return NeutralType.Altar;
+        }
     }
 }

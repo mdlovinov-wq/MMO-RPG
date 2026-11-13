@@ -131,7 +131,7 @@ namespace MMO_RPG
                 throw new ArgumentException("Coordinates must be between width and height");
             }
 
-            if (IsCellValid(x, y))
+            if (!IsCellValid(x, y) || GetNeutral(x, y) != null)
             {
                 throw new InvalidOperationException("You can't place object here");
             }

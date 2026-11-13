@@ -16,7 +16,7 @@ namespace MMO_RPG
 
         public bool IsPassable(Unit unit)
         {
-            if (unit.GetUnitType() != UnitType.Sorcer && unit.GetUnitType() != UnitType.Healer)
+            if (unit.GetUnitType() != UnitType.Sorcerer && unit.GetUnitType() != UnitType.Healer)
             {
                 return true;
             }
@@ -26,6 +26,11 @@ namespace MMO_RPG
         public bool IsStuck(Unit unit)
         {
             return false;
+        }
+
+        public TerrainType GetTerrainType()
+        {
+            return TerrainType.Mountain;
         }
     }
 }

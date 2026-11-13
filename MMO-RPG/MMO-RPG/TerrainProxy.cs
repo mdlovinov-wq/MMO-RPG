@@ -25,6 +25,11 @@ namespace MMO_RPG
             return terrain.GetSpeedModifier(unit);
         }
 
+        public TerrainType GetTerrainType()
+        {
+            return terrain.GetTerrainType();
+        }
+
         public bool IsPassable(Unit unit)
         {
             return terrain.IsPassable(unit);

@@ -69,6 +69,7 @@
     <Compile Include="MoveSpeed.cs" />
     <Compile Include="MoveSpeedBoost.cs" />
     <Compile Include="NeutralObjects.cs" />
+    <Compile Include="NeutralType.cs" />
     <Compile Include="PhantomAssasin.cs" />
     <Compile Include="PhantomAssasinFactory.cs" />
     <Compile Include="Plain.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="TankFactory.cs" />
     <Compile Include="TerrainMap.cs" />
     <Compile Include="TerrainProxy.cs" />
+    <Compile Include="TerrainType.cs" />
     <Compile Include="Trap.cs" />
     <Compile Include="TrapStrategy.cs" />
     <Compile Include="Unit.cs" />

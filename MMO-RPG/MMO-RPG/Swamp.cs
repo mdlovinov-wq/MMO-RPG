@@ -11,8 +11,8 @@ namespace MMO_RPG
 
         public double GetSpeedModifier(Unit unit)
         {
-            if (unit.GetUnitType() == "BountyHunter" || unit.GetUnitType() == "Tank" ||
-                unit.GetUnitType() == "Knight")
+            if (unit.GetUnitType() == UnitType.BountyHunter || unit.GetUnitType() == UnitType.Tank ||
+                unit.GetUnitType() == UnitType.Knight)
             {
                 return 0.5;
             }
@@ -21,7 +21,7 @@ namespace MMO_RPG
 
         public bool IsPassable(Unit unit)
         {
-            if (unit.GetUnitType() == "PhantomAssasin")
+            if (unit.GetUnitType() == UnitType.PhantomAssasin)
             {
                 return false;
             }
@@ -30,7 +30,7 @@ namespace MMO_RPG
 
         public bool IsStuck(Unit unit)
         {
-            if (unit.GetUnitType() == "Tank")
+            if (unit.GetUnitType() == UnitType.Tank)
             {
                 Random random = new Random();
                 if (random.Next(1, 5) == 1)
@@ -39,6 +39,11 @@ namespace MMO_RPG
                 }
             }
             return false;
+        }
+
+        public TerrainType GetTerrainType()
+        {
+            return TerrainType.Swamp;
         }
     }
 }

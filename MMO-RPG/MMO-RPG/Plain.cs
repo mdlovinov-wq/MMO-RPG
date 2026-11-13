@@ -24,5 +24,10 @@ namespace MMO_RPG
         {
             return false;
         }
+
+        public TerrainType GetTerrainType()
+        {
+            return TerrainType.Plain;
+        }
     }
 }
