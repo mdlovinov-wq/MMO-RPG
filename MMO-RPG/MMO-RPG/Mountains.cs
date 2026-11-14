@@ -18,9 +18,9 @@ namespace MMO_RPG
         {
             if (unit.GetUnitType() != UnitType.Sorcerer && unit.GetUnitType() != UnitType.Healer)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         public bool IsStuck(Unit unit)

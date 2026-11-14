@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Resources;
 
 namespace MMO_RPG
 {
@@ -33,6 +34,11 @@ namespace MMO_RPG
         public override NeutralType GetNeutralType()
         {
             return NeutralType.Trap;
+        }
+
+        public override NeutralObjects Clone()
+        {
+            return new Trap(X, Y);
         }
     }
 }

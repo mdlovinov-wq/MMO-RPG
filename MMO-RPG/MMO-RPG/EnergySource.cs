@@ -34,5 +34,10 @@ namespace MMO_RPG
         {
             return NeutralType.Source;
         }
+
+        public override NeutralObjects Clone()
+        {
+            return new EnergySource(X, Y);
+        }
     }
 }

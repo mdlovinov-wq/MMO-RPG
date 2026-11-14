@@ -32,7 +32,18 @@ namespace MMO_RPG
 
         public bool IsPassable(Unit unit)
         {
-            return terrain.IsPassable(unit);
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+                
+
+            bool result = terrain.IsPassable(unit);
+
+            Console.WriteLine($"[Proxy] {unit.GetUnitType()} | " + $"{terrain.GetTerrainType()} | Passable: {result}");
+
+            return result;
+
         }
 
         public bool IsStuck(Unit unit)

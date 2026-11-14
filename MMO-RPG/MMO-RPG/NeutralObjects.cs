@@ -33,5 +33,7 @@ namespace MMO_RPG
         }
 
         public abstract NeutralType GetNeutralType();
+
+        public abstract NeutralObjects Clone();
     }
 }

@@ -32,6 +32,40 @@ namespace MMO_RPG
             }
         }
 
+        public TerrainMap(TerrainMap other) : this(other.Width, other.Height)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    TerrainType type = other.GetTerrain(x, y).GetTerrainType();
+
+                    ITerrain terrain;
+
+                    switch (type)
+                    {
+                        case TerrainType.Forest:
+                            terrain = new Forest();
+                            break;
+
+                        case TerrainType.Swamp:
+                            terrain = new Swamp();
+                            break;
+
+                        case TerrainType.Mountain:
+                            terrain = new Mountains();
+                            break;
+
+                        default:
+                            terrain = new Plain();
+                            break;
+                    }
+
+                    SetTerrain(x, y, terrain);
+                }
+            }
+        }
+
         private void ValidateCoordinates(int x, int y)
         {
             if (x < 0 || x >= Width || y < 0 || y >= Height)

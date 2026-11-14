@@ -43,5 +43,10 @@ namespace MMO_RPG
 
             return unit;
         }
+
+        public override NeutralObjects Clone()
+        {
+            return new Chest(X, Y, Resources);
+        }
     }
 }

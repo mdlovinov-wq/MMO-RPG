@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Security.Policy;
+using System.Collections.Generic;
 
 namespace MMO_RPG
 {
@@ -25,7 +25,7 @@ namespace MMO_RPG
             {
                 throw new ArgumentNullException(nameof(factory));
             }
-            if (gameField.GetBase(x, y) == null)
+            if (!ReferenceEquals(gameField.GetBase(gameBase.X, gameBase.Y), gameBase))
             {
                 throw new InvalidOperationException("Base doesn't exist on field");
             }
@@ -51,22 +51,14 @@ namespace MMO_RPG
             return gameBase;
         }
 
-        public void MoveUnit(Unit unit, int x, int y)
+        public void MoveUnit(Unit unit, Direction direction)
         {
-
-            if (unit == null)
-            {
-                throw new ArgumentNullException(nameof(unit));
-            }
-
+            List<int> newCoordinates = gameField.NewCoordinates(unit, direction);
+            int x = newCoordinates[0];
+            int y = newCoordinates[1];
             if (!gameField.IsCellValid(x, y))
             {
                 throw new InvalidOperationException("You can't move unit here");
-            }
-
-            if (gameField.GetUnit(unit.X, unit.Y) != unit)
-            {
-                throw new InvalidOperationException("Unit doesn't exist on field");
             }
 
             ITerrain terrain = gameField.TerrainMap.GetTerrain(x, y);
@@ -80,9 +72,25 @@ namespace MMO_RPG
                 throw new InvalidOperationException("Terrain is not passable");
 
             }
-            gameField.MoveUnit(unit, x, y);
+            gameField.MoveUnit(unit, direction);
             unit.SetTerrainDefenseBonus(terrain.GetDefenseBonus(unit));
             unit.SetTerrainSpeedBonus(terrain.GetSpeedModifier(unit));
+            NeutralObjects neutral = gameField.GetNeutral(x, y);
+            switch (neutral.GetNeutralType())
+            {
+                case NeutralType.Altar:
+                    unit = unit * (Altar)neutral;
+                    break;
+                case NeutralType.Chest:
+                    unit = unit + (Chest)neutral;
+                    break;
+                case NeutralType.Source:
+                    unit = unit ^ (EnergySource)neutral;
+                    break;
+                case NeutralType.Trap:
+                    unit = unit - (Trap)neutral;
+                    break;
+            }
         }
 
         public void AttackUnit(Unit unitAttack, Unit unitDefense)

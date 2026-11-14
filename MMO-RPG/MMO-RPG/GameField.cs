@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MMO_RPG
 {
-    class GameField : IEnumerable<Unit>
+    class GameField : IEnumerable<Unit>, IObserver
     {
         private int width;
         private int height;
@@ -16,7 +16,7 @@ namespace MMO_RPG
         private List<NeutralObjects> objects;
         public TerrainMap TerrainMap
         {
-            get;
+            get; private set;
         }
 
         public GameField(int width, int height, int maxUnits, int maxBases)
@@ -46,10 +46,34 @@ namespace MMO_RPG
 
         public GameField(GameField other) : this(other.width, other.height, other.maxUnits, other.maxBases)
         {
-            foreach(Unit unit in other.units)
+            TerrainMap = new TerrainMap(other.TerrainMap);
+            Dictionary<Base, Base> baseCopies = new Dictionary<Base, Base>();
+
+            foreach (Base oldBase in other.bases)
             {
-                Unit clone = unit.Clone();
-                AddUnit(clone, clone.X, clone.Y);
+                Base newBase = new Base(oldBase);
+                AddBase(newBase, newBase.X, newBase.Y);
+                baseCopies.Add(oldBase, newBase);
+            }
+
+            foreach (Unit oldUnit in other.units)
+            {
+                Unit newUnit = oldUnit.Clone();
+                AddUnit(newUnit, newUnit.X, newUnit.Y);
+                foreach (Base oldBase in other.bases)
+                {
+                    if (oldBase.IsUnitInBase(oldUnit))
+                    {
+                        Base newBase = baseCopies[oldBase];
+                        newBase.RegisterClonedUnit(newUnit);
+                    }
+                }
+            }
+
+            foreach (NeutralObjects oldObject in other.objects)
+            {
+                NeutralObjects newObject = oldObject.Clone();
+                AddNeutralObject(newObject, newObject.X, newObject.Y);
             }
         }
 
@@ -86,6 +110,7 @@ namespace MMO_RPG
 
             unit.Move(x, y);
             units.Add(unit);
+            unit.Subscribe(this);
         }
 
         public void AddBase(Base gameBase, int x, int y)
@@ -149,7 +174,7 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("Unit doesn't exist");
             }
-
+            unit.Unsubscribe(this);
         }
 
         public void RemoveBase(Base gameBase)
@@ -182,8 +207,13 @@ namespace MMO_RPG
 
         public void Clear()
         {
+            foreach(Unit unit in units)
+            {
+                unit.Unsubscribe(this);
+            }
             units.Clear();
             bases.Clear();
+            objects.Clear();
         }
 
         public GameField CloneField()
@@ -309,6 +339,46 @@ namespace MMO_RPG
 
         }
 
+        public void MoveUnit(Unit unit, Direction direction)
+        {
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+
+            if (!units.Contains(unit))
+            {
+                throw new InvalidOperationException("Unit doesn't exist on this field");
+            }
+
+            int x = unit.X;
+            int y = unit.Y;
+            switch (direction)
+            {
+                case Direction.Left:
+                    x = Math.Max(x - unit.MoveSpeed.Current, 0);
+                    break;
+                case Direction.Right:
+                    x = Math.Min(x + unit.MoveSpeed.Current, width - 1);
+                    break;
+                case Direction.Up:
+                    y = Math.Max(y - unit.MoveSpeed.Current, 0);
+                    break;
+                case Direction.Down:
+                    y = Math.Min(y + unit.MoveSpeed.Current, height - 1);
+                    break;
+            }
+
+            Unit otherUnit = GetUnit(x, y);
+
+            if (otherUnit != null && ReferenceEquals(unit, otherUnit))
+            {
+                throw new InvalidOperationException("Cell is already occupied");
+            }
+
+            unit.Move(x, y);
+        }
+
         public bool IsCellValid(int x, int y)
         {
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -363,6 +433,31 @@ namespace MMO_RPG
             }
         }
 
+        public List<int> NewCoordinates(Unit unit, Direction direction)
+        {
+            List<int> coordinates = new List<int>();
+            int x = unit.X;
+            int y = unit.Y;
+            switch (direction)
+            {
+                case Direction.Left:
+                    x = Math.Max(x - unit.MoveSpeed.Current, 0);
+                    break;
+                case Direction.Right:
+                    x = Math.Min(x + unit.MoveSpeed.Current, width - 1);
+                    break;
+                case Direction.Up:
+                    y = Math.Max(y - unit.MoveSpeed.Current, 0);
+                    break;
+                case Direction.Down:
+                    y = Math.Min(y + unit.MoveSpeed.Current, height - 1);
+                    break;
+            }
+            coordinates.Add(x);
+            coordinates.Add(y);
+            return coordinates;
+        }
+
         public IEnumerator<Unit> GetEnumerator()
         {
             foreach(Unit unit in units.ToArray())
@@ -384,5 +479,12 @@ namespace MMO_RPG
             }
         }
 
+        public void OnUnitEvent(UnitEvent unitEvent)
+        {
+            if (unitEvent.Type == UnitEventType.Died)
+            {
+                units.Remove(unitEvent.Unit);
+            }
+        }
     }
 }

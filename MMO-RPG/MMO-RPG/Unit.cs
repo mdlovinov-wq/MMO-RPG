@@ -36,6 +36,9 @@ namespace MMO_RPG
             AttackSpeed = attackSpeed;
             DamageResist = damageResist;
             MoveSpeed = moveSpeed;
+            TerrainDefenseBonus = 1;
+            TerrainSpeedBonus = 0;
+            Resources = 0;
         }
 
         protected Unit(Unit other)
@@ -50,6 +53,9 @@ namespace MMO_RPG
             AttackSpeed = new AttackSpeed(other.AttackSpeed);
             DamageResist = new DamageResist(other.DamageResist);
             MoveSpeed = new MoveSpeed(other.MoveSpeed);
+            TerrainDefenseBonus = other.TerrainDefenseBonus;
+            Resources = other.Resources;
+            TerrainDefenseBonus = other.TerrainDefenseBonus;
         }
 
         internal virtual void Move(int x, int y)
@@ -103,14 +109,14 @@ namespace MMO_RPG
         {
             get
             {
-                double result = MoveSpeed.Current + TerrainSpeedBonus;
+                double result = MoveSpeed.Current * TerrainSpeedBonus;
                 if (result < 0)
                 {
                     return 0;
                 }
-                if (result > 100)
+                if (result > 5)
                 {
-                    return 100;
+                    return 5;
                 }
                 return result;
             }

@@ -62,13 +62,9 @@ namespace MMO_RPG
             X = other.X;
             Y = other.Y;
             MaxUnits = other.MaxUnits;
+            Resources = other.Resources;
             Health = new Health(other.Health);
             DefenseLevel = new DamageResist(other.DefenseLevel);
-
-            foreach (Unit unit in other.units)
-            {
-                units.Add(unit.Clone());
-            }
         }
 
         public Unit CreateUnit(IUnitFactory factory, int x, int y)
@@ -89,8 +85,24 @@ namespace MMO_RPG
             Unit unit = factory.CreateUnit(x, y);
             units.Add(unit);
             unit.Subscribe(this);
+            unit.Notify(new UnitEvent(unit, UnitEventType.Created));
             Resources -= 3;
             return unit;
+        }
+
+        public void RegisterClonedUnit(Unit unit)
+        {
+            if (unit == null)
+                throw new ArgumentNullException(nameof(unit));
+
+            if (units.Count >= MaxUnits)
+                throw new InvalidOperationException("Unit limit reached");
+
+            if (units.Contains(unit))
+                throw new InvalidOperationException("Unit already registered");
+
+            units.Add(unit);
+            unit.Subscribe(this);
         }
 
         public void IncreaseResources(int amount)
@@ -108,6 +120,19 @@ namespace MMO_RPG
             {
                 units.Remove(unitEvent.Unit);
                 unitEvent.Unit.Unsubscribe(this);
+                Console.WriteLine("Unit died");
+            }
+            else if (unitEvent.Type == UnitEventType.Created)
+            {
+                units.Remove(unitEvent.Unit);
+                unitEvent.Unit.Unsubscribe(this);
+                Console.WriteLine("Unit created");
+            }
+            else if (unitEvent.Type == UnitEventType.Damaged)
+            {
+                units.Remove(unitEvent.Unit);
+                unitEvent.Unit.Unsubscribe(this);
+                Console.WriteLine("Unit damaged");
             }
         }
 

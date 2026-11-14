@@ -28,7 +28,10 @@ namespace MMO_RPG
 
         public Health(Health other)
         {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
             Current = other.Current;
+            Max = other.Max;
         }
         
         public void Decrease(int amount)

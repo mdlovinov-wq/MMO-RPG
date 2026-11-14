@@ -44,7 +44,7 @@ namespace MMO_RPG
 
         public int CalculateDamage(Armor targetArmor, DamageResist targetResist)
         {
-            return (int)((targetArmor.ReduceDamage(Damage) * (1 - targetResist.Current)));
+            return (int)((targetArmor.ReduceDamage(Damage) * (1 - targetResist.Current / 100.0)));
             
         }
     }

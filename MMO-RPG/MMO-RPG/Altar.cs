@@ -35,5 +35,10 @@ namespace MMO_RPG
         {
             return NeutralType.Altar;
         }
+
+        public override NeutralObjects Clone()
+        {
+            return new Altar(X, Y);
+        }
     }
 }
