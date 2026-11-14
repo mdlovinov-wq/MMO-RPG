@@ -76,20 +76,23 @@ namespace MMO_RPG
             unit.SetTerrainDefenseBonus(terrain.GetDefenseBonus(unit));
             unit.SetTerrainSpeedBonus(terrain.GetSpeedModifier(unit));
             NeutralObjects neutral = gameField.GetNeutral(x, y);
-            switch (neutral.GetNeutralType())
+            if (neutral != null)
             {
-                case NeutralType.Altar:
-                    unit = unit * (Altar)neutral;
-                    break;
-                case NeutralType.Chest:
-                    unit = unit + (Chest)neutral;
-                    break;
-                case NeutralType.Source:
-                    unit = unit ^ (EnergySource)neutral;
-                    break;
-                case NeutralType.Trap:
-                    unit = unit - (Trap)neutral;
-                    break;
+                switch (neutral.GetNeutralType())
+                {
+                    case NeutralType.Altar:
+                        unit = unit * (Altar)neutral;
+                        break;
+                    case NeutralType.Chest:
+                        unit = unit + (Chest)neutral;
+                        break;
+                    case NeutralType.Source:
+                        unit = unit ^ (EnergySource)neutral;
+                        break;
+                    case NeutralType.Trap:
+                        unit = unit - (Trap)neutral;
+                        break;
+                }
             }
         }
 

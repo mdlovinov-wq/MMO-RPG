@@ -36,8 +36,8 @@ namespace MMO_RPG
             AttackSpeed = attackSpeed;
             DamageResist = damageResist;
             MoveSpeed = moveSpeed;
-            TerrainDefenseBonus = 1;
-            TerrainSpeedBonus = 0;
+            TerrainDefenseBonus = 0;
+            TerrainSpeedBonus = 1;
             Resources = 0;
         }
 

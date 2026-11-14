@@ -122,18 +122,6 @@ namespace MMO_RPG
                 unitEvent.Unit.Unsubscribe(this);
                 Console.WriteLine("Unit died");
             }
-            else if (unitEvent.Type == UnitEventType.Created)
-            {
-                units.Remove(unitEvent.Unit);
-                unitEvent.Unit.Unsubscribe(this);
-                Console.WriteLine("Unit created");
-            }
-            else if (unitEvent.Type == UnitEventType.Damaged)
-            {
-                units.Remove(unitEvent.Unit);
-                unitEvent.Unit.Unsubscribe(this);
-                Console.WriteLine("Unit damaged");
-            }
         }
 
         public void TakeDamage(int damage)

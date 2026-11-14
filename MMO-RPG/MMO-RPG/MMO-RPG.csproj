@@ -50,6 +50,7 @@
     <Compile Include="ConsoleRender.cs" />
     <Compile Include="DamageBoost.cs" />
     <Compile Include="DamageResist.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="EnergySource.cs" />
     <Compile Include="Forest.cs" />
     <Compile Include="GameController.cs" />

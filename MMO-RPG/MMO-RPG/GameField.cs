@@ -18,6 +18,14 @@ namespace MMO_RPG
         {
             get; private set;
         }
+        public int Width
+        {
+            get;
+        }
+        public int Height
+        {
+            get;
+        }
 
         public GameField(int width, int height, int maxUnits, int maxBases)
         {
@@ -37,6 +45,9 @@ namespace MMO_RPG
             this.height = height;
             this.maxUnits = maxUnits;
             this.maxBases = maxBases;
+
+            Width = width;
+            Height = height;
 
             units = new List<Unit>();
             bases = new List<Base>();
@@ -330,7 +341,7 @@ namespace MMO_RPG
 
             Unit otherUnit = GetUnit(x, y);
 
-            if (otherUnit != null && ReferenceEquals(unit, otherUnit))
+            if (otherUnit != null && !ReferenceEquals(unit, otherUnit))
             {
                 throw new InvalidOperationException("Cell is already occupied");
             }
@@ -356,24 +367,29 @@ namespace MMO_RPG
             switch (direction)
             {
                 case Direction.Left:
-                    x = Math.Max(x - unit.MoveSpeed.Current, 0);
+                    x = Math.Max(x - (int)unit.EffectiveSpeed, 0);
                     break;
                 case Direction.Right:
-                    x = Math.Min(x + unit.MoveSpeed.Current, width - 1);
+                    x = Math.Min(x + (int)unit.EffectiveSpeed, width - 1);
                     break;
                 case Direction.Up:
-                    y = Math.Max(y - unit.MoveSpeed.Current, 0);
+                    y = Math.Max(y - (int)unit.EffectiveSpeed, 0);
                     break;
                 case Direction.Down:
-                    y = Math.Min(y + unit.MoveSpeed.Current, height - 1);
+                    y = Math.Min(y + (int)unit.EffectiveSpeed, height - 1);
                     break;
             }
 
             Unit otherUnit = GetUnit(x, y);
 
-            if (otherUnit != null && ReferenceEquals(unit, otherUnit))
+            if (otherUnit != null && !ReferenceEquals(unit, otherUnit))
             {
                 throw new InvalidOperationException("Cell is already occupied");
+            }
+
+            if (GetBase(x, y) != null)
+            {
+                throw new InvalidOperationException("Cell is occupied by a base");
             }
 
             unit.Move(x, y);
@@ -483,7 +499,10 @@ namespace MMO_RPG
         {
             if (unitEvent.Type == UnitEventType.Died)
             {
-                units.Remove(unitEvent.Unit);
+                if (units.Contains(unitEvent.Unit))
+                {
+                    RemoveUnit(unitEvent.Unit);
+                }
             }
         }
     }

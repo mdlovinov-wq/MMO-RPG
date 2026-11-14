@@ -9,7 +9,7 @@ namespace MMO_RPG
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
-            Console.Clear();
+            
 
             for (int x = 0; x < width + 2; x++)
             {
