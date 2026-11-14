@@ -11,18 +11,15 @@ namespace MMO_RPG
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.Clear();
 
-            Console.Write("   ");
-
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < width + 2; x++)
             {
-                Console.Write($"{x,2}");
+                Console.Write("X ");
             }
-
             Console.WriteLine();
 
             for (int y = 0; y < height; y++)
             {
-                Console.Write($"{y,2} ");
+                Console.Write("X");
 
                 for (int x = 0; x < width; x++)
                 {
@@ -95,9 +92,14 @@ namespace MMO_RPG
                         }
                     }
                 }
-
-                Console.WriteLine();
+                Console.WriteLine(" X");
             }
+            for (int x = 0; x < width + 2; x++)
+            {
+                Console.Write("X ");
+            }
+
+            Console.WriteLine();
         }
 
     }
