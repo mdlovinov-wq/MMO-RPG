@@ -82,15 +82,19 @@ namespace MMO_RPG
                 {
                     case NeutralType.Altar:
                         unit = unit * (Altar)neutral;
+                        RemoveNeutral(neutral);
                         break;
                     case NeutralType.Chest:
                         unit = unit + (Chest)neutral;
+                        RemoveNeutral(neutral);
                         break;
                     case NeutralType.Source:
                         unit = unit ^ (EnergySource)neutral;
+                        RemoveNeutral(neutral);
                         break;
                     case NeutralType.Trap:
                         unit = unit - (Trap)neutral;
+                        RemoveNeutral(neutral);
                         break;
                 }
             }
@@ -171,6 +175,19 @@ namespace MMO_RPG
             }
 
             gameField.AddNeutralObject(neutral, neutral.X, neutral.Y);
+        }
+
+        public void RemoveNeutral(NeutralObjects neutral)
+        {
+            if (neutral == null)
+            {
+                throw new ArgumentNullException(nameof(neutral));
+            }
+            if (!ReferenceEquals(gameField.GetNeutral(neutral.X, neutral.Y), neutral))
+            {
+                throw new InvalidOperationException("Neutral object does not exist on the field");
+            }
+            gameField.RemoveNeutral(neutral);
         }
 
     }

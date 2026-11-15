@@ -202,6 +202,20 @@ namespace MMO_RPG
 
         }
 
+        public void RemoveNeutral(NeutralObjects neutral)
+        {
+            if (neutral == null)
+            {
+                throw new ArgumentNullException(nameof(neutral));
+            }
+
+            if (!objects.Remove(neutral))
+            {
+                throw new InvalidOperationException("Neutral object doesn't exist");
+            }
+
+        }
+
         public int UnitsCount()
         {
             return units.Count;

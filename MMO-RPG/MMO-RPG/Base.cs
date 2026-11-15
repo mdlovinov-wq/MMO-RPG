@@ -120,7 +120,7 @@ namespace MMO_RPG
             {
                 units.Remove(unitEvent.Unit);
                 unitEvent.Unit.Unsubscribe(this);
-                Console.WriteLine("Unit died");
+                Console.WriteLine("Observer: Unit died");
             }
         }
 
