@@ -36,9 +36,9 @@ namespace MMO_RPG
         
         public void Decrease(int amount)
         {
-            if (amount <= 0)
+            if (amount < 0)
             {
-                throw new ArgumentException("Damage must be positive");
+                throw new ArgumentException("Damage can't be negative");
             }
             if (amount > Current)
             {

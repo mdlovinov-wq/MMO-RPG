@@ -213,7 +213,7 @@ namespace MMO_RPG
             {
                 isPassable = false;
             }
-            Console.WriteLine($"Can knight pass mountain: {isPassable}");
+            Console.WriteLine($"Can tank pass mountain: {isPassable}");
 
             renderer.Render(field, 10, 10);
         }
@@ -367,8 +367,10 @@ namespace MMO_RPG
             renderer.Render(field, 10, 10);
             unit.TakeDamage(100);
             Log("The unit was dealt 100 damage");
+            Console.WriteLine($"In base: {gameBase.IsUnitInBase(unit)}");
 
-            
+            Console.WriteLine($"On field: {field.GetUnit(1, 1) != null}");
+
             renderer.Render(field, 10, 10);
 
         }

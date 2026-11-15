@@ -33,6 +33,10 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("You can't create unit here");
             }
+            if (gameField.IsFull)
+            {
+                throw new InvalidOperationException("Maximum number of units on field reached");
+            }
 
             Unit unit = gameBase.CreateUnit(factory, x, y);
             gameField.AddUnit(unit, x, y);
@@ -72,7 +76,7 @@ namespace MMO_RPG
                 throw new InvalidOperationException("Terrain is not passable");
 
             }
-            gameField.MoveUnit(unit, direction);
+            gameField.MoveUnit(unit, x, y);
             unit.SetTerrainDefenseBonus(terrain.GetDefenseBonus(unit));
             unit.SetTerrainSpeedBonus(terrain.GetSpeedModifier(unit));
             NeutralObjects neutral = gameField.GetNeutral(x, y);

@@ -27,6 +27,13 @@ namespace MMO_RPG
             get;
         }
 
+        public bool IsFull {
+            get
+            {
+                return units.Count >= maxUnits;
+            }
+        }
+
         public GameField(int width, int height, int maxUnits, int maxBases)
         {
             if (width <= 0 || height <= 0)
@@ -246,7 +253,7 @@ namespace MMO_RPG
             return new GameField(this);
             
         }
-        
+
         public static GameField CreateByMoving(GameField other)
         {
             if (other == null)
@@ -259,12 +266,23 @@ namespace MMO_RPG
                 other.height,
                 other.maxUnits,
                 other.maxBases
-                );
+            );
 
             newField.units = other.units;
-            other.units = new List<Unit>();
             newField.bases = other.bases;
+            newField.objects = other.objects;
+            newField.TerrainMap = other.TerrainMap;
+
+            other.units = new List<Unit>();
             other.bases = new List<Base>();
+            other.objects = new List<NeutralObjects>();
+            other.TerrainMap = new TerrainMap(other.width, other.height);
+
+            foreach (Unit unit in newField.units)
+            {
+                unit.Unsubscribe(other);
+                unit.Subscribe(newField);
+            }
 
             return newField;
         }
@@ -358,6 +376,11 @@ namespace MMO_RPG
             if (otherUnit != null && !ReferenceEquals(unit, otherUnit))
             {
                 throw new InvalidOperationException("Cell is already occupied");
+            }
+
+            if (GetBase(x, y) != null)
+            {
+                throw new InvalidOperationException("Cell is occupied by a base");
             }
 
             unit.Move(x, y);
@@ -465,27 +488,29 @@ namespace MMO_RPG
 
         public List<int> NewCoordinates(Unit unit, Direction direction)
         {
-            List<int> coordinates = new List<int>();
+            if (unit == null)
+            {
+                throw new ArgumentNullException(nameof(unit));
+            }
+            int speed = (int)unit.EffectiveSpeed;
             int x = unit.X;
             int y = unit.Y;
             switch (direction)
             {
                 case Direction.Left:
-                    x = Math.Max(x - unit.MoveSpeed.Current, 0);
+                    x = Math.Max(x - speed, 0);
                     break;
                 case Direction.Right:
-                    x = Math.Min(x + unit.MoveSpeed.Current, width - 1);
+                    x = Math.Min(x + speed, width - 1);
                     break;
                 case Direction.Up:
-                    y = Math.Max(y - unit.MoveSpeed.Current, 0);
+                    y = Math.Max(y - speed, 0);
                     break;
                 case Direction.Down:
-                    y = Math.Min(y + unit.MoveSpeed.Current, height - 1);
+                    y = Math.Min(y + speed, height - 1);
                     break;
             }
-            coordinates.Add(x);
-            coordinates.Add(y);
-            return coordinates;
+            return new List<int> { x, y };
         }
 
         public IEnumerator<Unit> GetEnumerator()

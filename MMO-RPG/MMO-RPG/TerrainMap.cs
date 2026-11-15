@@ -27,7 +27,7 @@ namespace MMO_RPG
             {
                 for (int y = 0; y < height; y++)
                 {
-                    terrains[x, y] = new Plain();
+                    terrains[x, y] = new TerrainProxy(new Plain());
                 }
             }
         }

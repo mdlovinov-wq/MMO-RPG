@@ -55,7 +55,7 @@ namespace MMO_RPG
             MoveSpeed = new MoveSpeed(other.MoveSpeed);
             TerrainDefenseBonus = other.TerrainDefenseBonus;
             Resources = other.Resources;
-            TerrainDefenseBonus = other.TerrainDefenseBonus;
+            TerrainSpeedBonus = other.TerrainSpeedBonus;
         }
 
         internal virtual void Move(int x, int y)
