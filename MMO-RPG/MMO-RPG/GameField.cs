@@ -74,6 +74,12 @@ namespace MMO_RPG
                 baseCopies.Add(oldBase, newBase);
             }
 
+            foreach (NeutralObjects oldObject in other.objects)
+            {
+                NeutralObjects newObject = oldObject.Clone();
+                AddNeutralObject(newObject, newObject.X, newObject.Y);
+            }
+
             foreach (Unit oldUnit in other.units)
             {
                 Unit newUnit = oldUnit.Clone();
@@ -88,11 +94,7 @@ namespace MMO_RPG
                 }
             }
 
-            foreach (NeutralObjects oldObject in other.objects)
-            {
-                NeutralObjects newObject = oldObject.Clone();
-                AddNeutralObject(newObject, newObject.X, newObject.Y);
-            }
+            
         }
 
         public void AddUnit(Unit unit, int x, int y)

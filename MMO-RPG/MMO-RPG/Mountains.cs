@@ -11,7 +11,7 @@ namespace MMO_RPG
 
         public double GetSpeedModifier(Unit unit)
         {
-            return 0;
+            return 1;
         }
 
         public bool IsPassable(Unit unit)
