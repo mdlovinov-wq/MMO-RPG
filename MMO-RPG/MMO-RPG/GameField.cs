@@ -208,7 +208,7 @@ namespace MMO_RPG
             {
                 throw new InvalidOperationException("Base doesn't exist");
             }
-
+            gameBase.UnsubscribeAll();
         }
 
         public void RemoveNeutral(NeutralObjects neutral)

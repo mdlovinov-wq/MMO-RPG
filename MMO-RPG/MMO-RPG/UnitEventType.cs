@@ -6,6 +6,7 @@ namespace MMO_RPG
     {
         Created,
         Damaged,
-        Died
+        Died,
+        Resources
     }
 }

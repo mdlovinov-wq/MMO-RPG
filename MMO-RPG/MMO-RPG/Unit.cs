@@ -21,7 +21,7 @@ namespace MMO_RPG
 
         public double TerrainDefenseBonus { get; private set; }
         public double TerrainSpeedBonus { get; private set; }
-        public int Resources { get; private set; }
+        public int CollectResources { get; private set; }
 
         protected Unit(int x, int y, Health health, Armor armor, Attack attack,
             AttackRange attackRange, AttackSpeed attackSpeed, DamageResist damageResist, 
@@ -38,7 +38,7 @@ namespace MMO_RPG
             MoveSpeed = moveSpeed;
             TerrainDefenseBonus = 0;
             TerrainSpeedBonus = 1;
-            Resources = 0;
+            CollectResources = 0;
         }
 
         protected Unit(Unit other)
@@ -54,7 +54,7 @@ namespace MMO_RPG
             DamageResist = new DamageResist(other.DamageResist);
             MoveSpeed = new MoveSpeed(other.MoveSpeed);
             TerrainDefenseBonus = other.TerrainDefenseBonus;
-            Resources = other.Resources;
+            CollectResources = other.CollectResources;
             TerrainSpeedBonus = other.TerrainSpeedBonus;
         }
 
@@ -175,13 +175,13 @@ namespace MMO_RPG
             {
                 throw new ArgumentNullException(nameof(amount));
             }
-            Resources += amount;
+            CollectResources += amount;
         }
 
         public int TakeResources()
         {
-            int collect = Resources;
-            Resources = 0;
+            int collect = CollectResources;
+            CollectResources = 0;
             return collect;
         }
 

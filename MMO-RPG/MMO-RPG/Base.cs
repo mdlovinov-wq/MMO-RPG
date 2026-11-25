@@ -131,6 +131,19 @@ namespace MMO_RPG
                     unitEvent.Unit.Unsubscribe(this);
                     Console.WriteLine("[Observer] Unit died");
                     break;
+
+                case UnitEventType.Resources:
+                    Resources = unitEvent.Unit.TakeResources();
+                    Console.WriteLine("[Observer] Unit opened chest");
+                    break;
+            }
+        }
+
+        public void UnsubscribeAll()
+        {
+            foreach (Unit unit in units)
+            {
+                unit.Unsubscribe(this);
             }
         }
 
@@ -152,14 +165,6 @@ namespace MMO_RPG
         public bool IsUnitInBase(Unit unit)
         {
             return units.Contains(unit);
-        }
-
-        public void CollectResources()
-        {
-            foreach (Unit unit in units)
-            {
-                Resources += unit.TakeResources();
-            }
         }
     }
 }

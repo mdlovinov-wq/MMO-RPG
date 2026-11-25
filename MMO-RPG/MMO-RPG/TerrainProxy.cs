@@ -36,7 +36,6 @@ namespace MMO_RPG
             {
                 throw new ArgumentNullException(nameof(unit));
             }
-                
 
             bool result = terrain.IsPassable(unit);
 
