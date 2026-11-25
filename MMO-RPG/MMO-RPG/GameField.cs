@@ -128,9 +128,28 @@ namespace MMO_RPG
                     "Maximum number of units reached");
             }
 
+            unit.SetID(units.Count);
             unit.Move(x, y);
             units.Add(unit);
             unit.Subscribe(this);
+        }
+
+        public Unit UnitById(int unitId)
+        {
+            if (unitId < 0 || unitId >= units.Count)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit ID");
+            }
+            return units[unitId];
+        }
+
+        public Base BaseById(int baseId)
+        {
+            if (baseId < 0 || baseId >= bases.Count)
+            {
+                throw new ArgumentOutOfRangeException("Invalid base ID");
+            }
+            return bases[baseId];
         }
 
         public void AddBase(Base gameBase, int x, int y)
@@ -156,6 +175,7 @@ namespace MMO_RPG
                 {
                     throw new InvalidOperationException("Maximum number of bases reached");
                 }
+                gameBase.SetId(bases.Count);
                 bases.Add(gameBase);
             }
             else

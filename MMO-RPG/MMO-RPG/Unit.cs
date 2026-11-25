@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 
 namespace MMO_RPG
@@ -22,6 +23,7 @@ namespace MMO_RPG
         public double TerrainDefenseBonus { get; private set; }
         public double TerrainSpeedBonus { get; private set; }
         public int CollectResources { get; private set; }
+        public int ID { get; private set; }
 
         protected Unit(int x, int y, Health health, Armor armor, Attack attack,
             AttackRange attackRange, AttackSpeed attackSpeed, DamageResist damageResist, 
@@ -188,6 +190,11 @@ namespace MMO_RPG
         public void MaxHealth()
         {
             Health.MakeHealthMax();
+        }
+
+        public void SetID(int id)
+        {
+            ID = id;
         }
     }
 }

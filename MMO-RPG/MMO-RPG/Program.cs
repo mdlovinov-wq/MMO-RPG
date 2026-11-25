@@ -34,7 +34,7 @@ namespace MMO_RPG
 
             GameField field = new GameField(10, 10, 50, 10);
             Log("Gamefield was created");
-            GameController controller = new GameController(field);
+            GameMediator controller = new GameMediator(field);
 
             IUnitFactory factory = null;
             Base gameBase = controller.CreateBase(0, 0, 10);
@@ -114,7 +114,7 @@ namespace MMO_RPG
 
             GameField field = new GameField(10, 10, 6, 2);
             Log("Gamefield was created");
-            GameController controller = new GameController(field);
+            GameMediator controller = new GameMediator(field);
 
 
             for (int x = 1; x < 3; x++)
@@ -226,7 +226,7 @@ namespace MMO_RPG
 
             GameField field = new GameField(10, 10, 50, 10);
             Log("Gamefield was created");
-            GameController controller = new GameController(field);
+            GameMediator controller = new GameMediator(field);
 
             Base gameBase = controller.CreateBase(0, 0, 10);
             Log("The first base was created");
@@ -356,7 +356,7 @@ namespace MMO_RPG
 
             GameField field = new GameField(10, 10, 50, 10);
             Log("Gamefield was created");
-            GameController controller = new GameController(field);
+            GameMediator controller = new GameMediator(field);
 
             Base gameBase = controller.CreateBase(0, 0, 10);
             Log("Base was created");

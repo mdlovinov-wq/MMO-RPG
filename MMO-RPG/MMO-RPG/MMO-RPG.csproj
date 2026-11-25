@@ -58,6 +58,7 @@
     <Compile Include="Healer.cs" />
     <Compile Include="HealerFactory.cs" />
     <Compile Include="Health.cs" />
+    <Compile Include="IGameFacade.cs" />
     <Compile Include="IInteractionStrategy.cs" />
     <Compile Include="IObservable.cs" />
     <Compile Include="IObserver.cs" />

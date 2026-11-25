@@ -4,10 +4,10 @@ using System.Runtime.Remoting.Channels;
 
 namespace MMO_RPG
 {
-    internal class GameController
+    internal class GameMediator
     {
         private readonly GameField gameField;
-        public GameController(GameField gameField)
+        public GameMediator(GameField gameField)
         {
             if (gameField == null)
             {
@@ -56,8 +56,9 @@ namespace MMO_RPG
             return gameBase;
         }
 
-        public void MoveUnit(Unit unit, Direction direction)
+        public void MoveUnit(int unitId, Direction direction)
         {
+            Unit unit = gameField.UnitById(unitId);
             List<int> newCoordinates = gameField.NewCoordinates(unit, direction);
             int x = newCoordinates[0];
             int y = newCoordinates[1];
@@ -105,8 +106,10 @@ namespace MMO_RPG
             }
         }
 
-        public void AttackUnit(Unit unitAttack, Unit unitDefense)
+        public void AttackUnit(int attackerId, int targetId)
         {
+            unitAttack = gameField.UnitById(attackerId);
+            unitDefense = gameField.UnitById(targetId);
             if (unitAttack == null)
             {
                 throw new ArgumentNullException(nameof(unitAttack));

@@ -25,6 +25,7 @@ namespace MMO_RPG
 
         public int X { get; private set; }
         public int Y { get; private set; }
+        public int ID { get; private set; }
         public Base(int x, int y, int maxUnits, Health initHealth, DamageResist defenseLevel, int resources)
         {
             if (x < 0 || y < 0)
@@ -165,6 +166,11 @@ namespace MMO_RPG
         public bool IsUnitInBase(Unit unit)
         {
             return units.Contains(unit);
+        }
+
+        public void SetId(int id)
+        {
+            ID = id;
         }
     }
 }
