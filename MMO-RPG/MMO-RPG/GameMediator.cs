@@ -16,8 +16,10 @@ namespace MMO_RPG
             this.gameField = gameField;
         }
 
-        public Unit CreateUnit(Base gameBase, IUnitFactory factory, int x, int y)
+        public Unit CreateUnit(string type, int baseId, int x, int y)
         {
+            Base gameBase = bases[baseId];
+            IUnitFactory factory = FactoryCreator.GetFactory(type);
             if (gameBase == null)
             {
                 throw new ArgumentNullException(nameof(gameBase));

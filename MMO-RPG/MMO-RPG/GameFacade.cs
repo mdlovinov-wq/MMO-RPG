@@ -17,6 +17,11 @@ namespace MMO_RPG
             mediator = new GameMediator(field);
         }
 
+        public Unit CreateUnit(string type, int baseId, int x, int y)
+        {
+            return mediator.CreateUnit(type, baseId, x, y);
+        }
+
         public void MoveUnit(int unitId, Direction direction)
         {
             mediator.MoveUnit(unitId, direction);
